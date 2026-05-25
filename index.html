@@ -3,102 +3,150 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Herry Wahyudi — Recruitment Dashboard</title>
+<title>Herry Wahyudi — CTI Recruitment Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#1a1a1a;--sf:#242424;--sf2:#2e2e2e;--bd:rgba(255,255,255,0.08);--bd2:rgba(255,255,255,0.15);--tx:#f5f5f5;--mt:#aaaaaa;--ac:#c0392b;--am:#e67e22;--bl:#2980b9;--rd:#e74c3c;--pu:#8e44ad}
 *{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#1c1c1c;
+  --sf:#252525;
+  --sf2:#2f2f2f;
+  --bd:rgba(255,255,255,0.08);
+  --bd2:rgba(255,255,255,0.15);
+  --tx:#f0f0f0;
+  --mt:#999;
+  --red:#c0392b;
+  --red2:#e74c3c;
+  --red-dim:rgba(192,57,43,0.12);
+  --gold:#d4a843;
+  --blue:#2980b9;
+  --orange:#e67e22;
+  --purple:#8e44ad;
+}
 body{background:var(--bg);color:var(--tx);font-family:'Outfit',sans-serif;font-size:14px;line-height:1.6;min-height:100vh}
-.header{padding:28px 40px 20px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:flex-end}
-.header h1{font-family:'DM Serif Display',serif;font-size:26px;color:var(--tx)}
+
+/* HEADER */
+.header{padding:20px 36px;border-bottom:2px solid var(--red);display:flex;justify-content:space-between;align-items:center;background:#1c1c1c}
+.header-left{display:flex;align-items:center;gap:16px}
+.logo-wrap{width:60px;height:60px;border-radius:50%;overflow:hidden;border:2px solid var(--red);flex-shrink:0}
+.logo-wrap img{width:100%;height:100%;object-fit:cover}
+.header h1{font-family:'DM Serif Display',serif;font-size:24px;color:#fff;letter-spacing:-0.3px}
 .header p{color:var(--mt);font-size:12px;margin-top:2px;font-family:'DM Mono',monospace}
-.date-badge{font-family:'DM Mono',monospace;font-size:11px;color:#c0392b;background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.25);padding:4px 12px;border-radius:20px}
-.tabs{display:flex;gap:4px;padding:18px 40px 0;border-bottom:1px solid var(--bd)}
-.tab{padding:8px 20px;font-size:13px;color:var(--mt);cursor:pointer;border:none;background:transparent;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
+.date-badge{font-family:'DM Mono',monospace;font-size:11px;color:var(--red2);background:var(--red-dim);border:1px solid rgba(192,57,43,0.3);padding:4px 12px;border-radius:20px}
+.prog-label{font-size:11px;color:var(--mt);margin-top:5px;font-family:'DM Mono',monospace;text-align:right}
+
+/* TABS */
+.tabs{display:flex;gap:0;padding:0 36px;border-bottom:1px solid var(--bd);background:#1c1c1c}
+.tab{padding:14px 24px;font-size:13px;color:var(--mt);cursor:pointer;border:none;background:transparent;border-bottom:3px solid transparent;margin-bottom:-1px;transition:all .2s;letter-spacing:0.02em}
 .tab:hover{color:var(--tx)}
-.tab.active{color:#c0392b;border-bottom-color:#c0392b}
-.main{padding:28px 40px;max-width:1200px}
+.tab.active{color:#fff;border-bottom-color:var(--red);font-weight:500}
+
+/* MAIN */
+.main{padding:28px 36px;max-width:1200px}
 .sec{display:none}.sec.active{display:block}
-.sh{display:flex;align-items:baseline;gap:12px;margin-bottom:18px}
-.st{font-family:'DM Serif Display',serif;font-size:20px}
+.sh{display:flex;align-items:baseline;gap:12px;margin-bottom:20px}
+.st{font-family:'DM Serif Display',serif;font-size:22px;color:#fff}
 .ss{font-size:12px;color:var(--mt);font-family:'DM Mono',monospace}
+
+/* METRICS */
 .metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:24px}
-.metric{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px;position:relative;overflow:hidden}
-.metric::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
-.metric.g::before{background:var(--ac)}.metric.a::before{background:var(--am)}.metric.b::before{background:var(--bl)}.metric.r::before{background:var(--rd)}.metric.p::before{background:var(--pu)}.metric.n::before{background:var(--bd2)}
-.ml{font-size:10px;color:var(--mt);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-family:'DM Mono',monospace}
-.mv{font-size:26px;font-weight:600;line-height:1}
-.mv.g{color:var(--ac)}.mv.a{color:var(--am)}.mv.b{color:var(--bl)}.mv.r{color:var(--rd)}.mv.p{color:var(--pu)}.mv.n{color:var(--tx)}
-.ms{font-size:11px;color:var(--mt);margin-top:3px}
+.metric{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:16px;cursor:pointer;transition:border-color .2s;position:relative;overflow:hidden}
+.metric::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.metric:hover{border-color:var(--bd2)}
+.metric.c-red::before{background:var(--red)}
+.metric.c-gold::before{background:var(--gold)}
+.metric.c-blue::before{background:var(--blue)}
+.metric.c-orange::before{background:var(--orange)}
+.metric.c-purple::before{background:var(--purple)}
+.metric.c-white::before{background:rgba(255,255,255,0.3)}
+.ml{font-size:10px;color:var(--mt);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-family:'DM Mono',monospace}
+.mv{font-size:28px;font-weight:600;line-height:1}
+.mv.red{color:var(--red2)}.mv.gold{color:var(--gold)}.mv.blue{color:var(--blue)}.mv.orange{color:var(--orange)}.mv.purple{color:var(--purple)}.mv.white{color:#fff}
+.ms{font-size:11px;color:var(--mt);margin-top:4px}
+
+/* CHARTS */
 .c2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-.cc{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:18px;cursor:pointer;transition:border-color .2s}
-.cc:hover{border-color:rgba(255,255,255,0.18)}
-.cc.clickable::after{content:'click to drill down';font-size:10px;color:var(--mt);font-family:'DM Mono',monospace;display:block;margin-top:6px;opacity:.6}
+.cc{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:20px;cursor:pointer;transition:border-color .2s;position:relative}
+.cc:hover{border-color:rgba(192,57,43,0.4)}
+.cc::after{content:'↗ click to drill down';font-size:10px;color:var(--mt);font-family:'DM Mono',monospace;position:absolute;bottom:10px;right:14px;opacity:.5}
 .ct{font-size:11px;font-weight:500;color:var(--mt);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;font-family:'DM Mono',monospace}
+
+/* FUNNEL */
 .funnel{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:24px}
-.fs{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:12px 8px;text-align:center;position:relative}
+.fs{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px 8px;text-align:center;position:relative;cursor:pointer;transition:border-color .2s}
+.fs:hover{border-color:rgba(192,57,43,0.4)}
 .fs::after{content:'→';position:absolute;right:-14px;top:50%;transform:translateY(-50%);color:var(--mt);font-size:12px}
 .fs:last-child::after{display:none}
-.fn{font-size:20px;font-weight:600;font-family:'DM Mono',monospace}
-.fl{font-size:10px;color:var(--mt);margin-top:3px;line-height:1.3}
-.acts{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:18px;margin-bottom:14px}
+.fn{font-size:22px;font-weight:600;font-family:'DM Mono',monospace}
+.fl{font-size:10px;color:var(--mt);margin-top:4px;line-height:1.3}
+
+/* ACTION ITEMS */
+.acts{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:20px;margin-bottom:14px}
 .at{font-size:11px;color:var(--mt);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;font-family:'DM Mono',monospace}
-.ai{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--bd)}
+.ai{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .15s;border-radius:6px;padding-left:8px;padding-right:8px}
+.ai:hover{background:var(--sf2)}
 .ai:last-child{border-bottom:none}
-.ad{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
-.ai strong{font-weight:500;font-size:13px}
+.ad{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.ai strong{font-weight:500;font-size:13px;color:#fff}
 .ai p{font-size:12px;color:var(--mt);margin-top:1px}
+
+/* RATING BARS */
 .rb{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.rl{font-size:12px;color:var(--mt);width:100px;font-family:'DM Mono',monospace}
+.rl{font-size:12px;color:var(--mt);width:90px;font-family:'DM Mono',monospace}
 .rt{flex:1;height:5px;background:var(--sf2);border-radius:3px;overflow:hidden}
 .rf{height:100%;border-radius:3px}
 .rc{font-size:12px;color:var(--mt);width:28px;text-align:right;font-family:'DM Mono',monospace}
-.sr{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bd);font-size:13px}
+
+/* STAT ROWS */
+.sr{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);font-size:13px;cursor:pointer;transition:background .15s;border-radius:4px;padding-left:6px;padding-right:6px}
+.sr:hover{background:var(--sf2)}
 .sr:last-child{border-bottom:none}
 .sk{color:var(--mt)}.sv{font-weight:500;font-family:'DM Mono',monospace}
 
 /* MODAL */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:100;overflow-y:auto}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:100;overflow-y:auto}
 .overlay.open{display:flex;align-items:flex-start;justify-content:center;padding:40px 20px}
-.modal{background:var(--sf);border:1px solid var(--bd2);border-radius:14px;width:100%;max-width:780px;padding:24px;position:relative}
-.modal-close{position:absolute;top:16px;right:16px;background:transparent;border:none;color:var(--mt);font-size:20px;cursor:pointer;line-height:1;padding:4px 8px;border-radius:6px}
-.modal-close:hover{color:var(--tx);background:var(--sf2)}
-.modal-title{font-family:'DM Serif Display',serif;font-size:18px;margin-bottom:4px}
-.modal-sub{font-size:12px;color:var(--mt);font-family:'DM Mono',monospace;margin-bottom:18px}
+.modal{background:#252525;border:1px solid rgba(192,57,43,0.3);border-radius:14px;width:100%;max-width:800px;padding:26px;position:relative}
+.modal-close{position:absolute;top:14px;right:14px;background:transparent;border:none;color:var(--mt);font-size:20px;cursor:pointer;padding:4px 8px;border-radius:6px}
+.modal-close:hover{color:#fff;background:var(--sf2)}
+.modal-title{font-family:'DM Serif Display',serif;font-size:20px;color:#fff;margin-bottom:4px}
+.modal-sub{font-size:12px;color:var(--mt);font-family:'DM Mono',monospace;margin-bottom:16px}
+.search-box{width:100%;background:var(--sf2);border:1px solid var(--bd2);border-radius:8px;padding:8px 12px;color:var(--tx);font-size:13px;margin-bottom:10px;font-family:'Outfit',sans-serif}
+.search-box::placeholder{color:var(--mt)}
+.modal-count{font-size:11px;color:var(--mt);margin-bottom:10px;font-family:'DM Mono',monospace}
 .mtable{width:100%;font-size:12px;border-collapse:collapse}
-.mtable th{text-align:left;color:var(--mt);padding:7px 10px;border-bottom:1px solid var(--bd);font-weight:500;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
-.mtable td{padding:7px 10px;border-bottom:1px solid var(--bd)}
+.mtable th{text-align:left;color:var(--mt);padding:7px 10px;border-bottom:1px solid var(--bd);font-weight:500;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase}
+.mtable td{padding:7px 10px;border-bottom:1px solid var(--bd);color:var(--tx)}
 .mtable tr:last-child td{border-bottom:none}
 .mtable tr:hover td{background:var(--sf2)}
-.pill{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:500}
-.pill-g{background:rgba(192,57,43,0.15);color:#c0392b}
-.pill-a{background:rgba(232,184,75,0.15);color:#e67e22}
-.pill-r{background:rgba(224,92,92,0.15);color:#e74c3c}
-.pill-b{background:rgba(91,141,217,0.15);color:#2980b9}
-.pill-m{background:rgba(155,127,212,0.15);color:#8e44ad}
-.search-box{width:100%;background:var(--sf2);border:1px solid var(--bd2);border-radius:8px;padding:8px 12px;color:var(--tx);font-size:13px;margin-bottom:14px;font-family:'Outfit',sans-serif}
-.search-box::placeholder{color:var(--mt)}
-.modal-count{font-size:12px;color:var(--mt);margin-bottom:10px;font-family:'DM Mono',monospace}
+.pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:500}
+.pg{background:rgba(39,174,96,0.15);color:#2ecc71}
+.pa{background:rgba(230,126,34,0.15);color:#e67e22}
+.pr{background:rgba(192,57,43,0.15);color:#e74c3c}
+.pb{background:rgba(41,128,185,0.15);color:#3498db}
+.pm{background:rgba(142,68,173,0.15);color:#9b59b6}
 
-@media(max-width:900px){.metrics{grid-template-columns:repeat(3,1fr)}.c2{grid-template-columns:1fr}.funnel{grid-template-columns:repeat(4,1fr)}.header,.tabs,.main{padding-left:20px;padding-right:20px}}
+@media(max-width:900px){
+  .metrics{grid-template-columns:repeat(3,1fr)}
+  .c2{grid-template-columns:1fr}
+  .funnel{grid-template-columns:repeat(4,1fr)}
+  .header,.tabs,.main{padding-left:16px;padding-right:16px}
+}
 </style>
 </head>
 <body>
 
 <div class="header">
-  <div style="display:flex;align-items:center;gap:20px">
-    <div style="width:64px;height:64px;flex-shrink:0;border-radius:50%;overflow:hidden;border:2px solid rgba(192,57,43,0.3)"><img src="logo.jpg" style="width:100%;height:100%;object-fit:cover" alt="CTI Group Logo"></div>
+  <div class="header-left">
+    <div class="logo-wrap"><img src="logo.jpg" alt="CTI Group"></div>
     <div>
-      <div style="display:flex;align-items:baseline;gap:10px">
-        <h1>Herry Wahyudi</h1>
-        
-      </div>
-      <p>Corporate Recruiter &nbsp;·&nbsp; Renon, Bali</p>
+      <h1>Herry Wahyudi</h1>
+      <p>Corporate Recruiter &nbsp;·&nbsp; CTI Indonesia &nbsp;·&nbsp; Renon, Bali</p>
     </div>
   </div>
-  <div style="text-align:right">
+  <div>
     <div class="date-badge">Updated 25 May 2026</div>
-    <div style="font-size:12px;color:var(--mt);margin-top:6px">J1 Program &nbsp;·&nbsp; Cruise Line (CUK)</div>
+    <div class="prog-label">J1 Program &nbsp;·&nbsp; Cruise Line (CUK)</div>
   </div>
 </div>
 
@@ -114,28 +162,30 @@ body{background:var(--bg);color:var(--tx);font-family:'Outfit',sans-serif;font-s
 <div class="sec active" id="sec-overview">
   <div class="sh"><span class="st">Your performance</span><span class="ss">both programs combined</span></div>
   <div class="metrics">
-    <div class="metric g"><div class="ml">J1 calls done</div><div class="mv g">415</div><div class="ms">63% of all team calls</div></div>
-    <div class="metric b"><div class="ml">Cruise interviews</div><div class="mv b">109</div><div class="ms">confirmed by you · 2026</div></div>
-    <div class="metric g"><div class="ml">J1 approved</div><div class="mv g">191</div><div class="ms">46% approval rate</div></div>
-    <div class="metric g"><div class="ml">Cruise approved</div><div class="mv g">93</div><div class="ms">85% approval rate</div></div>
-    <div class="metric p"><div class="ml">Offer completed</div><div class="mv p">89</div><div class="ms">cruise · fully processed</div></div>
-    <div class="metric a"><div class="ml">Marlins pending</div><div class="mv a">11</div><div class="ms">final step remaining</div></div>
+    <div class="metric c-red" onclick="openAllJ1Monthly()"><div class="ml">J1 calls done</div><div class="mv red">415</div><div class="ms">63% of all team calls</div></div>
+    <div class="metric c-blue" onclick="openAllCruise()"><div class="ml">Cruise interviews</div><div class="mv blue">109</div><div class="ms">confirmed by you · 2026</div></div>
+    <div class="metric c-red" onclick="openOutcomes('Approved')"><div class="ml">J1 approved</div><div class="mv red">191</div><div class="ms">46% approval rate</div></div>
+    <div class="metric c-red" onclick="openCruiseByStatus('Approved')"><div class="ml">Cruise approved</div><div class="mv red">93</div><div class="ms">85% approval rate</div></div>
+    <div class="metric c-purple" onclick="openCruiseByStatus('offer')"><div class="ml">Offer completed</div><div class="mv purple">89</div><div class="ms">cruise · fully processed</div></div>
+    <div class="metric c-gold" onclick="openCruiseByStatus('Approved - Marlins Pending')"><div class="ml">Marlins pending</div><div class="mv gold">11</div><div class="ms">final step remaining</div></div>
   </div>
+
   <div class="acts">
     <div class="at">Action items</div>
-    <div class="ai"><div class="ad" style="background:var(--ac)"></div><div><strong>89 cruise candidates fully processed</strong><p>Approved → offer completed → Marlins passed. Your strongest output metric.</p></div></div>
-    <div class="ai"><div class="ad" style="background:var(--am)"></div><div><strong>11 Marlins tests still pending</strong><p>All offer letters done. These candidates are at the very last step — follow up to push through.</p></div></div>
-    <div class="ai"><div class="ad" style="background:var(--bl)"></div><div><strong>191 J1 candidates approved by you</strong><p>48 currently in Stage 1, 41 in Stage 4, 1 already onboard USA.</p></div></div>
-    <div class="ai"><div class="ad" style="background:var(--rd)"></div><div><strong>57 J1 candidates on hold</strong><p>40 general hold, 17 need English improvement. Worth revisiting periodically.</p></div></div>
+    <div class="ai" onclick="openCruiseByStatus('offer')"><div class="ad" style="background:var(--red)"></div><div><strong>89 cruise candidates fully processed</strong><p>Approved → offer completed → Marlins passed. Your strongest output metric.</p></div></div>
+    <div class="ai" onclick="openCruiseByStatus('Approved - Marlins Pending')"><div class="ad" style="background:var(--gold)"></div><div><strong>11 Marlins tests still pending</strong><p>All offer letters done. These candidates are at the very last step — follow up to push through.</p></div></div>
+    <div class="ai" onclick="openOutcomes('Approved')"><div class="ad" style="background:var(--blue)"></div><div><strong>191 J1 candidates approved by you</strong><p>48 currently in Stage 1, 41 in Stage 4, 1 already onboard USA.</p></div></div>
+    <div class="ai" onclick="openOutcomes('On Hold')"><div class="ad" style="background:var(--orange)"></div><div><strong>57 J1 candidates on hold</strong><p>40 general hold, 17 need English improvement. Worth revisiting periodically.</p></div></div>
   </div>
+
   <div class="c2">
-    <div class="cc clickable" onclick="openChart('j1-monthly','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May',[16,52,64,27,75,96,42,18],'#c0392b','J1 consultation calls — monthly','First Name,Last Name,Country,Department,Outcome,Rating','j1_monthly')">
+    <div class="cc" id="wrap-ov-j1" onclick="clickChart('c-ov-j1',event)">
       <div class="ct">Your J1 calls per month</div>
-      <div style="position:relative;height:200px"><canvas id="c-ov-j1"></canvas></div>
+      <div style="position:relative;height:210px"><canvas id="c-ov-j1"></canvas></div>
     </div>
-    <div class="cc clickable" onclick="openChart('cruise-monthly','Jan','Feb','Mar','Apr','May',[14,16,29,26,24],'#2980b9','Cruise interviews — monthly','Name,Client,Dept,Position,Status','cruise_monthly')">
+    <div class="cc" id="wrap-ov-cruise" onclick="clickChart('c-ov-cruise',event)">
       <div class="ct">Cruise interviews confirmed by you</div>
-      <div style="position:relative;height:200px"><canvas id="c-ov-cruise"></canvas></div>
+      <div style="position:relative;height:210px"><canvas id="c-ov-cruise"></canvas></div>
     </div>
   </div>
 </div>
@@ -144,69 +194,64 @@ body{background:var(--bg);color:var(--tx);font-family:'Outfit',sans-serif;font-s
 <div class="sec" id="sec-j1">
   <div class="sh"><span class="st">J1 Program</span><span class="ss">415 consultation calls · your involvement only</span></div>
   <div class="metrics">
-    <div class="metric n"><div class="ml">Total calls</div><div class="mv n">415</div><div class="ms">done by you</div></div>
-    <div class="metric g"><div class="ml">Approved</div><div class="mv g">191</div><div class="ms">OTC + direct + pos N/A</div></div>
-    <div class="metric a"><div class="ml">On hold</div><div class="mv a">57</div><div class="ms">40 hold · 17 English</div></div>
-    <div class="metric r"><div class="ml">Denied</div><div class="mv r">9</div><div class="ms">not qualified</div></div>
-    <div class="metric p"><div class="ml">Now in stages</div><div class="mv p">93</div><div class="ms">Stage 1–4 active</div></div>
-    <div class="metric b"><div class="ml">USA onboard</div><div class="mv b">1</div><div class="ms">from your approvals</div></div>
+    <div class="metric c-white" onclick="openAllJ1Monthly()"><div class="ml">Total calls</div><div class="mv white">415</div><div class="ms">done by you</div></div>
+    <div class="metric c-red" onclick="openOutcomes('Approved')"><div class="ml">Approved</div><div class="mv red">191</div><div class="ms">OTC + direct + pos N/A</div></div>
+    <div class="metric c-gold" onclick="openOutcomes('On Hold')"><div class="ml">On hold</div><div class="mv gold">57</div><div class="ms">40 hold · 17 English</div></div>
+    <div class="metric c-orange" onclick="openOutcomes('Denied')"><div class="ml">Denied</div><div class="mv orange">9</div><div class="ms">not qualified</div></div>
+    <div class="metric c-blue"><div class="ml">Now in stages</div><div class="mv blue">93</div><div class="ms">Stage 1–4 active</div></div>
+    <div class="metric c-purple"><div class="ml">USA onboard</div><div class="mv purple">1</div><div class="ms">from your approvals</div></div>
   </div>
+
   <div class="sh" style="margin-top:4px"><span class="st" style="font-size:16px">Pipeline — your approved candidates</span></div>
-  <div class="funnel" style="margin-bottom:24px">
-    <div class="fs"><div class="fn" style="color:var(--ac)">191</div><div class="fl">Approved by you</div></div>
-    <div class="fs"><div class="fn" style="color:var(--bl)">68</div><div class="fl">Sales call stage</div></div>
-    <div class="fs"><div class="fn" style="color:var(--am)">48</div><div class="fl">Stage 1</div></div>
-    <div class="fs"><div class="fn" style="color:var(--am)">1</div><div class="fl">Stage 2</div></div>
-    <div class="fs"><div class="fn" style="color:var(--am)">3</div><div class="fl">Stage 3</div></div>
-    <div class="fs"><div class="fn" style="color:var(--am)">41</div><div class="fl">Stage 4</div></div>
-    <div class="fs"><div class="fn" style="color:var(--ac)">1</div><div class="fl">USA onboard</div></div>
+  <div class="funnel">
+    <div class="fs" onclick="openOutcomes('Approved')"><div class="fn" style="color:var(--red2)">191</div><div class="fl">Approved by you</div></div>
+    <div class="fs"><div class="fn" style="color:var(--blue)">68</div><div class="fl">Sales call stage</div></div>
+    <div class="fs"><div class="fn" style="color:var(--gold)">48</div><div class="fl">Stage 1</div></div>
+    <div class="fs"><div class="fn" style="color:var(--gold)">1</div><div class="fl">Stage 2</div></div>
+    <div class="fs"><div class="fn" style="color:var(--gold)">3</div><div class="fl">Stage 3</div></div>
+    <div class="fs"><div class="fn" style="color:var(--gold)">41</div><div class="fl">Stage 4</div></div>
+    <div class="fs"><div class="fn" style="color:#2ecc71">1</div><div class="fl">USA onboard</div></div>
   </div>
+
   <div class="c2">
-    <div class="cc clickable" onclick="openChart('j1-monthly','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May',[16,52,64,27,75,96,42,18],'#c0392b','J1 consultation calls — monthly','First Name,Last Name,Country,Department,Outcome,Rating','j1_monthly')">
-      <div class="ct">Your calls — monthly volume</div>
-      <div style="position:relative;height:200px"><canvas id="c-j1-monthly"></canvas></div>
+    <div class="cc" onclick="clickChart('c-j1-monthly',event)">
+      <div class="ct">Monthly call volume</div>
+      <div style="position:relative;height:210px"><canvas id="c-j1-monthly"></canvas></div>
     </div>
-    <div class="cc clickable" onclick="openOutcomes()">
+    <div class="cc" onclick="clickChart('c-j1-outcomes',event)">
       <div class="ct">Call outcomes breakdown</div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px">
-        <span style="font-size:11px;color:var(--mt);font-family:'DM Mono',monospace">OTC Approved 97 · Approved 87 · On Hold 40 · English 17 · Denied 9 · Pos N/A 7</span>
-      </div>
-      <div style="position:relative;height:175px"><canvas id="c-j1-outcomes"></canvas></div>
+      <div style="position:relative;height:210px"><canvas id="c-j1-outcomes"></canvas></div>
     </div>
   </div>
   <div class="c2">
-    <div class="cc clickable" onclick="openDept()">
+    <div class="cc" onclick="clickChart('c-j1-dept',event)">
       <div class="ct">Departments you covered</div>
-      <div style="position:relative;height:210px"><canvas id="c-j1-dept"></canvas></div>
+      <div style="position:relative;height:220px"><canvas id="c-j1-dept"></canvas></div>
     </div>
-    <div class="cc" style="cursor:default">
-      <div class="ct">Candidate ratings you gave</div>
-      <div style="margin-top:8px">
-        <div class="rb"><div class="rl">Excellent</div><div class="rt"><div class="rf" style="width:1%;background:#c0392b"></div></div><div class="rc">2</div></div>
-        <div class="rb"><div class="rl">Great</div><div class="rt"><div class="rf" style="width:11%;background:#c0392b"></div></div><div class="rc">23</div></div>
-        <div class="rb"><div class="rl">Good</div><div class="rt"><div class="rf" style="width:100%;background:#2980b9"></div></div><div class="rc">219</div></div>
-        <div class="rb"><div class="rl">Average</div><div class="rt"><div class="rf" style="width:4%;background:#e67e22"></div></div><div class="rc">9</div></div>
-        <div class="rb"><div class="rl">Below Std</div><div class="rt"><div class="rf" style="width:2%;background:#e74c3c"></div></div><div class="rc">5</div></div>
-      </div>
+    <div class="cc" onclick="clickChart('c-j1-country',event)">
+      <div class="ct">Countries you interviewed</div>
+      <div style="position:relative;height:220px"><canvas id="c-j1-country"></canvas></div>
     </div>
   </div>
-  <div class="c2">
-    <div class="cc clickable" onclick="openCountry()">
-      <div class="ct">Countries you interviewed</div>
-      <div style="position:relative;height:200px"><canvas id="c-j1-country"></canvas></div>
-    </div>
-    <div class="cc" style="cursor:default">
-      <div class="ct">Your approved candidates — current stage</div>
-      <div style="margin-top:4px">
-        <div class="sr"><span class="sk">Sales call</span><span class="sv" style="color:var(--bl)">68</span></div>
-        <div class="sr"><span class="sk">Stage 1</span><span class="sv" style="color:var(--am)">48</span></div>
-        <div class="sr"><span class="sk">Stage 4</span><span class="sv" style="color:var(--am)">41</span></div>
-        <div class="sr"><span class="sk">Stage 3</span><span class="sv" style="color:var(--am)">3</span></div>
-        <div class="sr"><span class="sk">Stage 2</span><span class="sv" style="color:var(--am)">1</span></div>
-        <div class="sr"><span class="sk">Withdrew after approval</span><span class="sv" style="color:var(--mt)">17</span></div>
-        <div class="sr"><span class="sk">USA onboard</span><span class="sv" style="color:var(--ac)">1</span></div>
-      </div>
-    </div>
+
+  <div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:20px;margin-bottom:14px">
+    <div class="ct">Candidate ratings you gave</div>
+    <div class="rb"><div class="rl">Excellent</div><div class="rt"><div class="rf" style="width:1%;background:var(--red)"></div></div><div class="rc">2</div></div>
+    <div class="rb"><div class="rl">Great</div><div class="rt"><div class="rf" style="width:11%;background:var(--red)"></div></div><div class="rc">23</div></div>
+    <div class="rb"><div class="rl">Good</div><div class="rt"><div class="rf" style="width:100%;background:#555"></div></div><div class="rc">219</div></div>
+    <div class="rb"><div class="rl">Average</div><div class="rt"><div class="rf" style="width:4%;background:var(--gold)"></div></div><div class="rc">9</div></div>
+    <div class="rb"><div class="rl">Below Std</div><div class="rt"><div class="rf" style="width:2%;background:var(--orange)"></div></div><div class="rc">5</div></div>
+  </div>
+
+  <div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:20px">
+    <div class="ct">Your approved candidates — current stage</div>
+    <div class="sr" onclick="openModal('Candidates in Sales Call stage','68 candidates approved by you now in sales call','',[ ],['Stage','Note'])"><span class="sk">Sales call</span><span class="sv" style="color:var(--blue)">68</span></div>
+    <div class="sr" onclick="openModal('Candidates in Stage 1','48 candidates in Stage 1','',[],'')"><span class="sk">Stage 1</span><span class="sv" style="color:var(--gold)">48</span></div>
+    <div class="sr" onclick="openModal('Candidates in Stage 4','41 candidates in Stage 4','',[],'')"><span class="sk">Stage 4</span><span class="sv" style="color:var(--gold)">41</span></div>
+    <div class="sr"><span class="sk">Stage 3</span><span class="sv" style="color:var(--gold)">3</span></div>
+    <div class="sr"><span class="sk">Stage 2</span><span class="sv" style="color:var(--gold)">1</span></div>
+    <div class="sr"><span class="sk">Withdrew after approval</span><span class="sv" style="color:var(--mt)">17</span></div>
+    <div class="sr"><span class="sk">USA onboard</span><span class="sv" style="color:#2ecc71">1</span></div>
   </div>
 </div>
 
@@ -214,61 +259,59 @@ body{background:var(--bg);color:var(--tx);font-family:'Outfit',sans-serif;font-s
 <div class="sec" id="sec-cruise">
   <div class="sh"><span class="st">Cruise Line — CUK</span><span class="ss">109 interviews confirmed by you · 2026</span></div>
   <div class="metrics">
-    <div class="metric n"><div class="ml">Confirmed by you</div><div class="mv n">109</div><div class="ms">Jan–May 2026</div></div>
-    <div class="metric g"><div class="ml">Approved</div><div class="mv g">93</div><div class="ms">85% approval rate</div></div>
-    <div class="metric r"><div class="ml">Declined</div><div class="mv r">4</div><div class="ms">did not qualify</div></div>
-    <div class="metric a"><div class="ml">No show</div><div class="mv a">8</div><div class="ms">missed interview</div></div>
-    <div class="metric p"><div class="ml">Offer completed</div><div class="mv p">89</div><div class="ms">of 93 approved</div></div>
-    <div class="metric a"><div class="ml">Marlins pending</div><div class="mv a">11</div><div class="ms">last step</div></div>
+    <div class="metric c-white" onclick="openAllCruise()"><div class="ml">Confirmed by you</div><div class="mv white">109</div><div class="ms">Jan–May 2026</div></div>
+    <div class="metric c-red" onclick="openCruiseByStatus('Approved')"><div class="ml">Approved</div><div class="mv red">93</div><div class="ms">85% approval rate</div></div>
+    <div class="metric c-orange" onclick="openCruiseByStatus('Declined')"><div class="ml">Declined</div><div class="mv orange">4</div><div class="ms">did not qualify</div></div>
+    <div class="metric c-gold" onclick="openCruiseByStatus('No Show')"><div class="ml">No show</div><div class="mv gold">8</div><div class="ms">missed interview</div></div>
+    <div class="metric c-purple" onclick="openCruiseByStatus('offer')"><div class="ml">Offer completed</div><div class="mv purple">89</div><div class="ms">of 93 approved</div></div>
+    <div class="metric c-gold" onclick="openCruiseByStatus('Approved - Marlins Pending')"><div class="ml">Marlins pending</div><div class="mv gold">11</div><div class="ms">last step</div></div>
   </div>
   <div class="c2">
-    <div class="cc clickable" onclick="openChart('cruise-monthly','Jan','Feb','Mar','Apr','May',[14,16,29,26,24],'#2980b9','Cruise interviews — monthly','Name,Client,Dept,Position,Status','cruise_monthly')">
+    <div class="cc" onclick="clickChart('c-cr-monthly',event)">
       <div class="ct">Monthly interviews — your cases</div>
-      <div style="position:relative;height:200px"><canvas id="c-cr-monthly"></canvas></div>
+      <div style="position:relative;height:210px"><canvas id="c-cr-monthly"></canvas></div>
     </div>
-    <div class="cc clickable" onclick="openCruiseDept()">
+    <div class="cc" onclick="clickChart('c-cr-dept',event)">
       <div class="ct">Outcomes by department</div>
-      <div style="display:flex;gap:12px;margin-bottom:8px;font-size:11px;color:var(--mt)">
-        <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:2px;background:var(--ac);display:inline-block"></span>Approved</span>
-        <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:2px;background:var(--rd);display:inline-block"></span>Declined</span>
+      <div style="display:flex;gap:14px;margin-bottom:8px;font-size:11px;color:var(--mt)">
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:2px;background:#2ecc71;display:inline-block"></span>Approved</span>
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:2px;background:var(--red2);display:inline-block"></span>Declined</span>
       </div>
       <div style="position:relative;height:180px"><canvas id="c-cr-dept"></canvas></div>
     </div>
   </div>
   <div class="c2">
-    <div class="cc" style="cursor:default">
-      <div class="ct">P&O Cruises vs Cunard Line</div>
-      <div style="margin-top:4px">
-        <div class="sr"><span class="sk">P&O Cruises — approved</span><span class="sv" style="color:var(--ac)">86</span></div>
-        <div class="sr"><span class="sk">P&O Cruises — declined</span><span class="sv" style="color:var(--rd)">4</span></div>
-        <div class="sr"><span class="sk">Cunard Line — approved</span><span class="sv" style="color:var(--ac)">7</span></div>
-        <div class="sr"><span class="sk">Cunard Line — declined</span><span class="sv" style="color:var(--rd)">0</span></div>
-        <div class="sr"><span class="sk">Offer completed (total)</span><span class="sv" style="color:var(--pu)">89</span></div>
-        <div class="sr"><span class="sk">Marlins passed</span><span class="sv" style="color:var(--ac)">78</span></div>
-        <div class="sr"><span class="sk">Marlins pending</span><span class="sv" style="color:var(--am)">11</span></div>
-      </div>
+    <div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:20px">
+      <div class="ct">P&amp;O Cruises vs Cunard Line</div>
+      <div class="sr" onclick="openCruiseByClient('P&O Cruises','Approved')"><span class="sk">P&amp;O Cruises — approved</span><span class="sv" style="color:#2ecc71">86</span></div>
+      <div class="sr" onclick="openCruiseByClient('P&O Cruises','Declined')"><span class="sk">P&amp;O Cruises — declined</span><span class="sv" style="color:var(--red2)">4</span></div>
+      <div class="sr" onclick="openCruiseByClient('Cunard Line','Approved')"><span class="sk">Cunard Line — approved</span><span class="sv" style="color:#2ecc71">7</span></div>
+      <div class="sr" onclick="openCruiseByClient('Cunard Line','Declined')"><span class="sk">Cunard Line — declined</span><span class="sv" style="color:var(--red2)">0</span></div>
+      <div class="sr" onclick="openCruiseByStatus('offer')"><span class="sk">Offer completed</span><span class="sv" style="color:var(--purple)">89</span></div>
+      <div class="sr" onclick="openCruiseMarlinsPassed()"><span class="sk">Marlins passed</span><span class="sv" style="color:#2ecc71">78</span></div>
+      <div class="sr" onclick="openCruiseByStatus('Approved - Marlins Pending')"><span class="sk">Marlins pending</span><span class="sv" style="color:var(--gold)">11</span></div>
     </div>
-    <div class="cc clickable" onclick="openAttendance()">
+    <div class="cc" onclick="clickChart('c-cr-att',event)">
       <div class="ct">Attendance breakdown</div>
-      <div style="display:flex;gap:12px;margin-bottom:8px;font-size:11px;color:var(--mt)">
-        <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:2px;background:var(--ac);display:inline-block"></span>Present (98)</span>
-        <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:2px;background:var(--am);display:inline-block"></span>No show (8)</span>
-        <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:2px;background:var(--bl);display:inline-block"></span>Rescheduled (2)</span>
+      <div style="display:flex;gap:14px;margin-bottom:8px;font-size:11px;color:var(--mt)">
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:2px;background:#2ecc71;display:inline-block"></span>Present (98)</span>
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:2px;background:var(--gold);display:inline-block"></span>No show (8)</span>
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:2px;background:var(--blue);display:inline-block"></span>Rescheduled (2)</span>
       </div>
-      <div style="position:relative;height:180px"><canvas id="c-cr-att"></canvas></div>
+      <div style="position:relative;height:185px"><canvas id="c-cr-att"></canvas></div>
     </div>
   </div>
 </div>
 
-</div><!-- end main -->
+</div>
 
 <!-- MODAL -->
-<div class="overlay" id="overlay" onclick="closeModal(event)">
-  <div class="modal" id="modal">
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeOverlay()">
+  <div class="modal">
     <button class="modal-close" onclick="closeOverlay()">✕</button>
     <div class="modal-title" id="modal-title"></div>
     <div class="modal-sub" id="modal-sub"></div>
-    <input class="search-box" id="modal-search" placeholder="Search candidates..." oninput="filterModal()" />
+    <input class="search-box" id="modal-search" placeholder="Search candidates..." oninput="filterModal()">
     <div class="modal-count" id="modal-count"></div>
     <div id="modal-body" style="overflow-x:auto"></div>
   </div>
@@ -276,249 +319,192 @@ body{background:var(--bg);color:var(--tx);font-family:'Outfit',sans-serif;font-s
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded",function(){
-const T={color:'rgba(255,255,255,0.3)',font:{size:11,family:"'DM Mono',monospace"}};
-const G={color:'rgba(255,255,255,0.05)'};
+const DATA = {"j1_monthly": {"Oct": [["Piyada", "Sukparkarn", "Thailand", "Guest Relations", "Approved", "Good"], ["Atittaya", "Junhom", "Thailand", "Guest Relations", "On Hold", "\u2014"], ["Jackline", "Kamau", "Kenya", "Sales & Marketing", "On Hold", "Good"], ["Chinatip", "Telawanit", "Thailand", "Guest Relations", "On Hold", "Great"], ["Julia", "Mpofu", "South Africa", "Food & Beverage", "Approved", "Good"], ["Vishali", "Suri", "India", "Food & Beverage", "Approved", "Good"]], "Nov": [["I Gede Angga Krisna", "Putra", "Indonesia", "Culinary", "Approved", "Good"], ["Muhammad", "Faishal Hafizh", "Indonesia", "Culinary", "Approved", "Great"], ["Lee", "Gandi", "Zimbabwe", "Housekeeping", "Approved", "Good"], ["Threethawat", "Kinnara", "Thailand", "Guest Relations", "Approved", "Good"], ["Langazana", "Dube", "Zimbabwe", "Food & Beverage", "Approved", "Good"], ["I Ketut Arta Sedana", "Putra", "Indonesia", "Guest Relations", "Approved", "Great"], ["Alessandra", "Salim", "Peru", "Human Resources", "Approved", "Great"], ["Thananuch", "Somboon", "Thailand", "Guest Relations", "Approved", "Good"]], "Dec": [["Ni Made Pinky", "Oktarini", "Indonesia", "Food & Beverage", "Approved - OTC Students", "Good"], ["Roberth Agustinus", "Chandra", "Indonesia", "Culinary", "Approved", "Good"], ["Kittiyapon", "Tajah", "Thailand", "Guest Relations", "Approved", "Good"], ["Olwethu Lucia", "Budlela", "South Africa", "Food & Beverage", "Approved", "Good"], ["Athman", "Chimerah", "Kenya", "Housekeeping", "Approved", "Good"], ["Leania", "Chipadza", "South Africa", "Housekeeping", "Approved", "Good"]], "Jan": [["Ivan Febian", "Maulandi", "Qatar", "Housekeeping", "Approved", "Good"], ["I Made Pranata", "Kusuma", "Indonesia", "Food & Beverage", "Approved", "Good"], ["Richmond Doe", "Adekplorvi", "Ghana", "Culinary", "Approved", "Great"], ["Mohammed", "Ali", "Ghana", "Culinary", "Approved", "Great"], ["Tepsirin", "Nooprasit", "Maldives", "Guest Relations", "Approved", "Good"], ["Snenhlanhla", "Manyathi", "South Africa", "Food & Beverage", "Approved", "Good"]], "Feb": [["Gunadi Witha", "Gunadi", "Indonesia", "Culinary", "Approved", "Great"], ["Erlintang", "Erlintang", "Indonesia", "Food & Beverage", "Approved", "Good"], ["Rahmat Agung Sri", "Santosa", "Indonesia", "Food & Beverage", "Approved", "Good"], ["Dedy Darus", "Salam", "Indonesia", "Housekeeping", "Approved", "Good"], ["Lindiwe", "Mdaka", "South Africa", "Food & Beverage", "Approved", "Good"], ["Mbuso", "Cibane", "South Africa", "Culinary", "Approved", "Good"]], "Mar": [["Ni Made Ari Kartika", "Dewi", "Indonesia", "Guest Relations", "Approved", "Good"], ["I Kadek Wahyu", "Suwamerta", "Indonesia", "Guest Relations", "Approved", "Great"], ["Andri", "Wahyudi", "Indonesia", "Culinary", "Approved", "Good"], ["Ya Hsin", "Hsu", "Thailand", "Food & Beverage", "Approved", "Excellent"], ["I Ketut Endi", "Parta", "Indonesia", "Food & Beverage", "Approved", "Good"], ["Wahyu Francesco", "Hutabarat", "Indonesia", "IT", "Approved", "Excellent"]], "Apr": [["Franky Hartono", "Fransiskus", "Indonesia", "Food & Beverage", "Approved", "Good"], ["Iin", "Misrohatun", "Indonesia", "Culinary", "Approved", "Good"], ["Ni Kadek Juni", "Artini", "Indonesia", "Culinary", "Approved", "Good"], ["Ni Wayan", "Sintya Devi", "Indonesia", "Food & Beverage", "Approved", "Great"], ["Erika", "Sinta Amarta", "Indonesia", "Guest Relations", "Approved", "Good"], ["Dian Maulana", "Saputra", "Indonesia", "Culinary", "Approved", "Great"]], "May": [["Sharon Wambui", "Wanjiku", "Kenya", "Food & Beverage", "Approved", "Good"], ["Sihle", "Rayi", "South Africa", "Culinary", "Approved", "Good"], ["Stefy", "Anyona", "Kenya", "Guest Relations", "Approved", "Good"], ["Al Amin", "Hossain", "Malaysia", "Food & Beverage", "Approved", "Good"]]}, "j1_outcomes": {"OTC Approved": [["Ida Bagus Putu Adi", "Ramana", "Indonesia", "Culinary", "2026-04-07"], ["I Kadek Roby", "Mahendra", "Indonesia", "Culinary", "2026-04-07"], ["Putu Mahindra", "Yana", "Indonesia", "F&B", "2026-02-18"], ["I Made Agus", "Suartana", "Indonesia", "F&B", "2026-02-13"]], "Approved": [["Franky Hartono", "Fransiskus", "Indonesia", "F&B", "2026-04-22"], ["Sharon Wambui", "Wanjiku", "Kenya", "F&B", "2026-05-19"], ["Gunadi Witha", "Gunadi", "Indonesia", "Culinary", "2026-02-26"], ["Ya Hsin", "Hsu", "Thailand", "F&B", "2026-03-02"]], "On Hold": [["Dimas Eka", "Santosa", "Indonesia", "Culinary", "2026-04-22"], ["Ida Bagus Surya", "Saputra", "Indonesia", "F&B", "2026-02-25"], ["Bridget", "Dlodlo", "South Africa", "Guest Relations", "2026-04-09"], ["Chanitta", "Marasri", "Thailand", "F&B", "2026-01-05"]], "English": [["Ni Wayan Wili", "Kasih", "Indonesia", "Culinary", "2026-03-30"], ["Renal Glen", "Kurniawan", "Indonesia", "Culinary", "2026-02-06"], ["Abdul", "Aziz", "Indonesia", "Housekeeping", "2026-01-29"]], "Denied": [["Khanapi", "Khanapi", "Indonesia", "Housekeeping", "2026-03-23"], ["Bima Dzakiy", "Pratama", "Indonesia", "F&B", "2026-03-09"], ["Awonke", "Ralarala", "South Africa", "Culinary", "2026-02-19"]], "Pos N/A": [["Kelzier Mwikali", "Kavisa", "Kenya", "Youth Staff", "2026-05-22"], ["David", "Chama", "Kenya", "F&B", "2026-04-22"], ["Zacharia Sifiso", "Mlambo", "South Africa", "IT", "2026-03-05"]]}, "cruise_monthly": {"Jan": [["Obet Nehemia Chiwoso", "P&O Cruises", "Galley", "Commis Pastry", "Approved"], ["Bintang Bagas Pamungkas", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Fikri Al ' Amin", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Made Adi Swastika Yasa", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Putu Putra Yogeswara", "P&O Cruises", "Housekeeping", "Housekeeping - Laundry Attendant", "Rescheduled"], ["I Gede Nyoman Yudi Adi Wijaya", "Cunard Line", "Housekeeping", "Hotel Assistant Housekeeping", "Approved"], ["Dio Vani Bagas Priaswanto", "Cunard Line", "Housekeeping", "Hotel Assistant Housekeeping", "Approved"], ["Yulfian Jaya Kusuma", "Cunard Line", "Housekeeping", "Hotel Assistant Housekeeping", "Approved"], ["Sindiswa Xaba", "P&O Cruises", "Culinary", "Demi Chef de Partie Pastry", "No Show"], ["I Nengah Sudiantara", "P&O Cruises", "Housekeeping", "Housekeeping - Laundry Attendant", "No Show"], ["Ditya Hartono Putera", "P&O Cruises", "Culinary", "Demi Chef de Partie Pastry", "No Show"], ["Sithembinkosi Sibanda", "P&O Cruises", "Culinary", "Demi Chef de Partie Pastry", "\u2014"], ["Bernedetus Nova Adaviano", "P&O Cruises", "Housekeeping", "Laundry Assistant", "Approved"], ["Yubilia Devi", "P&O Cruises", "Culinary", "Commis Pastry", "Approved"]], "Feb": [["Vanya Michellelyne", "Cunard Line", "Hotel Ops", "Guest Services - Receptionist", "Declined"], ["Ghani Pamungkas", "P&O Cruises", "Culinary", "Commis Pastry", "Approved"], ["Sandi Sanjaya", "P&O Cruises", "Culinary", "Commis - Pastry", "No Show"], ["Hartono Fnu", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Fahriza Alfian Fauzi", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Pradita Pitaloka", "P&O Cruises", "Culinary", "Commis Pastry", "Approved"], ["Muhammad Samsul Arifin", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Fakeh Sandy Nusyamas", "P&O Cruises", "Housekeeping", "Laundry Assistant", "Approved"], ["Kamila Kamila", "P&O Cruises", "Culinary", "Commis - Pastry", "Declined"], ["Andile Muzingaye Ngwenya", "P&O Cruises", "Culinary", "Commis - Pastry", "Declined"], ["Mzamiseni Dlamini", "P&O Cruises", "Culinary", "Commis - Pastry", "No Show"], ["Lee Roy Tinashe Mudengezi", "P&O Cruises", "Culinary", "Demi Chef de Partie Pastry", "No Show"], ["Sibanda Hardlife", "P&O Cruises", "Culinary", "Commis - Pastry", "Declined"], ["Yeukai Muunganirwa", "P&O Cruises", "Culinary", "Commis - Pastry", "Rescheduled"], ["I Made Angga Adijaya", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Nolvia Harry Cristi Payung", "P&O Cruises", "Culinary", "Commis Pastry", "Approved"]], "Mar": [["Rizky Fadillah", "P&O Cruises", "Galley", "Commis - Pastry", "No Show"], ["Ananda Wahyu Setyawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Mohammad Fahim", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Dedy Kurnia Sandi", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Danang Fajar Nuryanto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Mahindra Ari Trisnawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Andi Hermawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Eka Linda Handayani", "P&O Cruises", "Culinary", "Demi Chef De Partie Pastry", "Approved"], ["I Gede Agus Sugiantara", "P&O Cruises", "Housekeeping", "Laundry Assistant", "No Show"], ["Nathaniel Peter", "P&O Cruises", "Culinary", "Commis - Pastry", "Present"], ["I Komang Dika Pratama", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Ketut Aditya Hendrawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Terta Adi Tama", "P&O Cruises", "Housekeeping", "Laundry Assistant", "Approved"], ["Agung Tyas  Jatmiko", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Wayan Suweta", "P&O Cruises", "Housekeeping", "Housekeeper (Deck/Night/Crew)", "Approved"], ["Ega Dyanta Ratih", "P&O Cruises", "Entertainment", "Stage Crew", "Approved"], ["Prendi Apriyanto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Virgiawan Aji Putranto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Hari Mukti", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Atik Hardiati", "P&O Cruises", "Culinary", "Commis Pastry", "Approved"], ["Juniardi \u2014", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Dina Tera Daristy", "P&O Cruises", "Galley", "Commis Pastry", "Approved"], ["Ni Made Ari Kartika Dewi", "Cunard Line", "Hotel Ops", "Receptionist", "Approved"], ["Sekti Nugroho", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Bukhori Ikhsan Muslim Khoirru Falah", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Kadek Mas Agus Gunawan Adi Putra", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Akhmad Rendi Pratama", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Martinus Bagus Prihananto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Made Vino Adi Wijaya", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"]], "Apr": [["Ni Kadek Deviani", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Putu Dodik Sutaryawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Komang Aprila Jaya Artha Kepakisan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Wayan Sindhu Saputra", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Kadek Bayu Saputra", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Mohamad Ghiyas Ubaidillah", "P&O Cruises", "Galley", "Commis Pastry", "Approved"], ["I Made Rianprajawinata", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Andry Fahmi", "P&O Cruises", "Housekeeping", "Housekeeper (Deck/Night/Crew)", "Approved - Marlins Pending"], ["Muhtarudin Khoiri", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Handry Anom Ervianto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved - Marlins Pending"], ["Mochammad Yusril Rahmatilah", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Gusti Agung Sukham", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Deky Putra Herlambang", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Putu Deo Suhartawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Putu Diva Krisnanata Sudirta", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Kadek Arya Gunawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Ni Luh Jeni Meliantini", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Dewa Kadek Harry Marjaya", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Ndumiso Dlamini", "P&O Cruises", "Galley", "Commis Pastry", "Approved"], ["Hidayat Kusuma", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Ni Kadek Intan Setasih", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Hafiz Fahrurrozi", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Aan Nasrudin", "P&O Cruises", "Housekeeping", "Laundry Assistant", "Approved"], ["Made Paramarta", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Gede Ngurah Nova Sudiartawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Ragil Andani", "P&O Cruises", "Galley", "Commis Pastry", "Approved - Marlins Pending"]], "May": [["Faiz Zhahir Shodiq Prabowo", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Agus Mulyadi", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Muhammad Yudha Pratama", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Andri Purwanto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Dimas Adi Setyawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Komang Luki Kusuma", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Fnu Solahudin", "P&O Cruises", "Housekeeping", "Housekeeper (Deck/Night/Crew)", "Approved"], ["Muhammad Yafie Al Hakim", "P&O Cruises", "Galley", "Commis Pastry", "Approved"], ["Irfan Firmansyah", "P&O Cruises", "Galley", "Commis Pastry", "Approved"], ["Arga Andrianto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Ni Made Puspa Sukmantini", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Putu Adi Kusuma", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved - Marlins Pending"], ["Putu Adi Pratama Kori", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved - Marlins Pending"], ["Wildan Achsani Takwim", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved - Marlins Pending"], ["I Ketut Deni Muliawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Dicky Baskoro", "Cunard Line", "Housekeeping", "Hotel Assistant Housekeeping", "Approved"], ["Lukman Adifarhan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Andra Hermawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Bagas Apriliyanto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Dhimas Saputra", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved - Marlins Pending"], ["Resa Ardiansyah", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved - Marlins Pending"], ["I Made Agustiawan Dwi Putra", "Cunard Line", "Housekeeping", "Hotel Assistant Housekeeping", "Approved - Marlins Pending"], ["I Wayan Juni Agus Artawan", "Cunard Line", "Housekeeping", "Hotel Assistant Housekeeping", "Approved - Marlins Pending"], ["Taufik Maulidika", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved - Marlins Pending"]]}};
 
-function bar(id,labels,data,color){
-  return new Chart(document.getElementById(id),{type:'bar',
+const T={color:'rgba(255,255,255,0.3)',font:{size:11,family:"'DM Mono',monospace"}};
+const G={color:'rgba(255,255,255,0.06)'};
+const CHARTS={};
+
+function mkBar(id,labels,data,color){
+  if(CHARTS[id]) CHARTS[id].destroy();
+  CHARTS[id]=new Chart(document.getElementById(id),{
+    type:'bar',
     data:{labels,datasets:[{data,backgroundColor:color,borderRadius:4}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{x:{ticks:T,grid:{display:false}},y:{beginAtZero:true,ticks:T,grid:G}}}});
+      scales:{x:{ticks:T,grid:{display:false}},y:{beginAtZero:true,ticks:T,grid:G}}}
+  });
 }
-function barH(id,labels,data,colors){
-  return new Chart(document.getElementById(id),{type:'bar',
+function mkBarH(id,labels,data,colors){
+  if(CHARTS[id]) CHARTS[id].destroy();
+  CHARTS[id]=new Chart(document.getElementById(id),{
+    type:'bar',
     data:{labels,datasets:[{data,backgroundColor:colors,borderRadius:4}]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{x:{beginAtZero:true,ticks:T,grid:G},y:{ticks:{...T,font:{size:10,family:"'DM Mono',monospace"}},grid:{display:false}}}}});
+      scales:{x:{beginAtZero:true,ticks:T,grid:G},y:{ticks:{...T,font:{size:10}},grid:{display:false}}}}
+  });
 }
-function donut(id,labels,data,colors){
-  return new Chart(document.getElementById(id),{type:'doughnut',
+function mkDonut(id,labels,data,colors){
+  if(CHARTS[id]) CHARTS[id].destroy();
+  CHARTS[id]=new Chart(document.getElementById(id),{
+    type:'doughnut',
     data:{labels,datasets:[{data,backgroundColor:colors,borderWidth:0,hoverOffset:4}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:false}}}});
+    options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:false}}}
+  });
 }
-function grouped(id,labels,ds){
-  return new Chart(document.getElementById(id),{type:'bar',data:{labels,datasets:ds},
+function mkGrouped(id,labels,ds){
+  if(CHARTS[id]) CHARTS[id].destroy();
+  CHARTS[id]=new Chart(document.getElementById(id),{
+    type:'bar',data:{labels,datasets:ds},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{x:{ticks:{...T,maxRotation:30},grid:{display:false}},y:{beginAtZero:true,ticks:T,grid:G}}}});
+      scales:{x:{ticks:{...T,maxRotation:30},grid:{display:false}},y:{beginAtZero:true,ticks:T,grid:G}}}
+  });
 }
 
-bar('c-ov-j1',['Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],[16,52,64,27,75,96,42,18],'#c0392b');
-bar('c-ov-cruise',['Jan','Feb','Mar','Apr','May'],[14,16,29,26,24],'#2980b9');
-bar('c-j1-monthly',['Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],[16,52,64,27,75,96,42,18],'#c0392b');
-donut('c-j1-outcomes',['OTC Approved','Approved','On Hold','English','Denied','Pos N/A'],[97,87,40,17,9,7],['#c0392b','#e74c3c','#e67e22','#f39c12','#e74c3c','#95a5a6']);
-barH('c-j1-dept',['F&B','Culinary','Housekeeping','Guest Rel','Finance','Security','IT','Youth'],[202,94,48,43,4,4,4,3],['#c0392b','#2980b9','#e67e22','#8e44ad','#e74c3c','#c0392b','#2980b9','#e67e22']);
-bar('c-j1-country',['Indonesia','Thailand','S. Africa','Kenya','Zimbabwe','India'],[235,69,35,25,8,6],'#2980b9');
-bar('c-cr-monthly',['Jan','Feb','Mar','Apr','May'],[14,16,29,26,24],'#2980b9');
-grouped('c-cr-dept',['Galley','Culinary','Housekeeping','Hotel Ops','Entertainment'],[
-  {label:'Approved',data:[72,6,13,1,1],backgroundColor:'#c0392b',borderRadius:3},
-  {label:'Declined',data:[0,4,0,1,0],backgroundColor:'#e74c3c',borderRadius:3}
-]);
-donut('c-cr-att',['Present','No Show','Rescheduled'],[98,8,2],['#c0392b','#e67e22','#2980b9']);
+function buildCharts(){
+  mkBar('c-ov-j1',['Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],[16,52,64,27,75,96,42,18],'#c0392b');
+  mkBar('c-ov-cruise',['Jan','Feb','Mar','Apr','May'],[14,16,29,26,24],'#2980b9');
+  mkBar('c-j1-monthly',['Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],[16,52,64,27,75,96,42,18],'#c0392b');
+  mkDonut('c-j1-outcomes',['OTC Approved','Approved','On Hold','English','Denied','Pos N/A'],[97,87,40,17,9,7],['#c0392b','#e74c3c','#e67e22','#f39c12','#95a5a6','#7f8c8d']);
+  mkBarH('c-j1-dept',['F&B','Culinary','Housekeeping','Guest Rel','Finance','Security','IT','Youth'],[202,94,48,43,4,4,4,3],['#c0392b','#e74c3c','#e67e22','#d4a843','#2980b9','#8e44ad','#16a085','#27ae60']);
+  mkBar('c-j1-country',['Indonesia','Thailand','S. Africa','Kenya','Zimbabwe','India'],[235,69,35,25,8,6],'#2980b9');
+  mkBar('c-cr-monthly',['Jan','Feb','Mar','Apr','May'],[14,16,29,26,24],'#c0392b');
+  mkGrouped('c-cr-dept',['Galley','Culinary','Housekeeping','Hotel Ops','Entertainment'],[
+    {label:'Approved',data:[72,6,13,1,1],backgroundColor:'#2ecc71',borderRadius:3},
+    {label:'Declined',data:[0,4,0,1,0],backgroundColor:'#c0392b',borderRadius:3}
+  ]);
+  mkDonut('c-cr-att',['Present','No Show','Rescheduled'],[98,8,2],['#2ecc71','#e67e22','#2980b9']);
+}
 
+// Show tab
 function showTab(t,btn){
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
   document.getElementById('sec-'+t).classList.add('active');
   btn.classList.add('active');
+  setTimeout(buildCharts,50);
 }
 
-// DRILL DOWN DATA
-const DATA = {"j1_monthly":{"Oct":[["Piyada","Sukparkarn","Thailand","Guest Relations","Approved","Good"],["Atittaya","Junhom","Thailand","Guest Relations","On Hold","—"],["Jackline","Kamau","Kenya","Sales & Marketing","On Hold","Good"],["Ruchirek","Saechaeo","Thailand","Housekeeping","On Hold","—"],["Chinatip","Telawanit","Thailand","Guest Relations","On Hold","Great"],["Julia","Mpofu","South Africa","Food & Beverage","Approved","Good"],["Ivy Tafadzwa","Zvinoira","Zimbabwe","Food & Beverage","On Hold","Good"],["Vishali","Suri","India","Food & Beverage","Approved","Good"],["Kamonwan","Sathornsantikun","Thailand","Guest Relations","On Hold","Good"],["Somnuek","Saejang","Thailand","Food & Beverage","—","—"]],"Nov":[["I Gede Angga Krisna Mahadi","Putra","Indonesia","Culinary","Approved","Good"],["Muhammad","Faishal Hafizh","Indonesia","Culinary","Approved","Great"],["Lee","Gandi","Zimbabwe","Housekeeping","Approved","Good"],["Rutendo","Shirichena","Australia","Culinary","Approved","Good"],["Threethawat","Kinnara","Thailand","Guest Relations","Approved","Good"],["Langazana","Dube","Zimbabwe","Food & Beverage","Approved","Good"],["I Ketut Arta Sedana","Putra","Indonesia","Guest Relations","Approved","Great"],["Alessandra","Salim","Peru","Human Resources","Approved","Great"],["I Gede Putu Rezia","Widiantara","Indonesia","Food & Beverage","Approved - OTC Students","Good"],["Thananuch","Somboon","Thailand","Guest Relations","Approved","Good"]],"Dec":[["Ni Made Pinky","Oktarini","Indonesia","Food & Beverage","Approved - OTC Students","Good"],["I Wayan","Sujana","Indonesia","Food & Beverage","Approved - OTC Students","Good"],["Roberth Agustinus","Chandra","Indonesia","Culinary","Approved","Good"],["Kittiyapon","Tajah","Thailand","Guest Relations","Approved","Good"],["Jarupa","Sringam","Thailand","Sales & Marketing","Approved","Great"],["Olwethu Lucia","Budlela","South Africa","Food & Beverage","Approved","Good"],["Eric","Scott","Ghana","Food & Beverage","Approved","Good"],["Athman","Chimerah","Kenya","Housekeeping","Approved","Good"],["Leania","Chipadza","South Africa","Housekeeping","Approved","Good"],["Wahyu","Lsu","Indonesia","Food & Beverage","Approved","Good"]],"Jan":[["Ivan Febian","Maulandi","Qatar","Housekeeping","Approved","Good"],["I Made Pranata","Kusuma","Indonesia","Food & Beverage","Approved","Good"],["Richmond Doe","Adekplorvi","Ghana","Culinary","Approved","Great"],["Mohammed","Ali","Ghana","Culinary","Approved","Great"],["Daniel Parningotan","Butar Butar","Indonesia","Food & Beverage","Approved","Good"],["Anak Agung Gde Anom Surya","Agung","Indonesia","Food & Beverage","Approved - OTC Students","Good"],["Ni Made Dianza","Pratiwi","Indonesia","Food & Beverage","Approved - OTC Students","Good"],["Tepsirin","Nooprasit","Maldives","Guest Relations","Approved","Good"],["Snenhlanhla","Manyathi","South Africa","Food & Beverage","Approved","Good"],["Sinoxolo","Kosani","South Africa","Finance","Approved","Good"]],"Feb":[["Gunadi Witha","Gunadi","Indonesia","Culinary","Approved","Great"],["Erlintang","Erlintang","Indonesia","Food & Beverage","Approved","Good"],["Putu Mahindra","Yana","Indonesia","Food & Beverage","Approved - OTC Students","Good"],["Rahmat Agung Sri","Santosa","Indonesia","Food & Beverage","Approved","Good"],["Dedy Darus","Salam","Indonesia","Housekeeping","Approved","Good"],["I Kadek Ricky","Artawan","Indonesia","Food & Beverage","Approved","Good"],["I Putu Bya Pradika","Krisna","Indonesia","Housekeeping","Approved","Good"],["Lindiwe","Mdaka","South Africa","Food & Beverage","Approved","Good"],["I Made","Widana","Indonesia","Food & Beverage","Approved","Good"],["Mbuso","Cibane","South Africa","Culinary","Approved","Good"]],"Mar":[["Ni Made Ari Kartika","Dewi","Indonesia","Guest Relations","Approved","Good"],["I Kadek Wahyu","Suwamerta","Indonesia","Guest Relations","Approved","Great"],["Andri","Wahyudi","Indonesia","Culinary","Approved","Good"],["Andica Eka","Nugraha","Indonesia","Culinary","Approved","Good"],["Merry Destiani","Sinaga","Indonesia","Culinary","Approved","Good"],["Ya Hsin","Hsu","Thailand","Food & Beverage","Approved","Excellent"],["I Ketut Endi","Parta","Indonesia","Food & Beverage","Approved","Good"],["Muh. Khalis","Qalbi Apal","Indonesia","Culinary","Approved","Good"],["I Made","Dwijananda","Indonesia","Guest Relations","Approved","Good"],["Wahyu Francesco","Hutabarat","Indonesia","Information Technology","Approved","Excellent"]],"Apr":[["Franky Hartono","Fransiskus","Indonesia","Food & Beverage","Approved","Good"],["Iin","Misrohatun","Indonesia","Culinary","Approved","Good"],["Abd. Halim","HS","Indonesia","Culinary","Approved","Good"],["Ni Kadek Juni","Artini","Indonesia","Culinary","Approved","Good"],["Ni Wayan","Sintya Devi","Indonesia","Food & Beverage","Approved","Great"],["Ni Putu Sienna Diva","Larassati","Indonesia","Guest Relations","Approved","Good"],["Erika","Sinta Amarta","Indonesia","Guest Relations","Approved","Good"],["Dian Maulana Saputra","Dian","Indonesia","Culinary","Approved","Great"],["I Wayan Gegelliawan","Wayan","Indonesia","Food & Beverage","Approved","Good"],["David","Chama","Kenya","Food & Beverage","Approved - Pos N/A","Good"]],"May":[["Sharon Wambui","Wanjiku","Kenya","Food & Beverage","Approved","Good"],["Sihle","Rayi","South Africa","Culinary","Approved","Good"],["Stefy","Anyona","Kenya","Guest Relations","Approved","Good"],["Al Amin","Hossain","Malaysia","Food & Beverage","Approved","Good"],["Kelzier Mwikali","Kavisa","Kenya","Youth Staff","Approved - Pos N/A","Good"],["Zacharia Sifiso","Mlambo","South Africa","IT","Approved - Pos N/A","Good"]]},"j1_outcomes":{"OTC Approved":[["Ida Bagus Putu Adi","Ramana","Indonesia","Culinary","2026-04-07"],["I Kadek Roby","Mahendra","Indonesia","Culinary","2026-04-07"],["Komang Aldi Surya","Wirawan","Indonesia","Culinary","2026-02-06"],["I Made Aditya Dwi","Putra","Indonesia","Culinary","2026-02-06"],["Ni Komang Jaya","Wiguna","Indonesia","Culinary","2026-03-11"],["Putu Mahindra","Yana","Indonesia","Food & Beverage","2026-02-18"],["I Made Agus","Suartana","Indonesia","Food & Beverage","2026-02-13"],["Ni Made Pinky","Oktarini","Indonesia","Food & Beverage","2025-12-16"],["Anak Agung Gde Anom Surya","Agung","Indonesia","Food & Beverage","2026-01-07"],["I Gede Putu Rezia","Widiantara","Indonesia","Food & Beverage","2025-11-06"]],"Approved":[["Franky Hartono","Fransiskus","Indonesia","Food & Beverage","2026-04-22"],["Sharon Wambui","Wanjiku","Kenya","Food & Beverage","2026-05-19"],["Sihle","Rayi","South Africa","Culinary","2026-05-20"],["Gunadi Witha","Gunadi","Indonesia","Culinary","2026-02-26"],["Andri","Wahyudi","Indonesia","Culinary","2026-03-24"],["Ya Hsin","Hsu","Thailand","Food & Beverage","2026-03-02"],["I Ketut Endi","Parta","Indonesia","Food & Beverage","2026-03-06"],["Rahmat Agung Sri","Santosa","Indonesia","Food & Beverage","2026-02-05"],["Lindiwe","Mdaka","South Africa","Food & Beverage","2026-02-12"],["I Made","Widana","Indonesia","Food & Beverage","2026-02-10"]],"On Hold":[["Dimas Eka","Santosa","Indonesia","Culinary","2026-04-22"],["I Gede Agus","Wirawan","Indonesia","Food & Beverage","2026-04-29"],["Siswanto",".","Indonesia","Housekeeping","2026-03-12"],["Ramadhan","Putra","Indonesia","Food & Beverage","2026-03-03"],["Ida Bagus Surya","Saputra","Indonesia","Food & Beverage","2026-02-25"],["Bridget","Dlodlo","South Africa","Guest Relations","2026-04-09"],["Lunga Amelda","Smith","South Africa","Housekeeping","2026-02-02"],["I Putu Krisma Widya","Dana","Indonesia","Housekeeping","2026-01-27"],["Chanitta","Marasri","Thailand","Food & Beverage","2026-01-05"],["Benjamin","Primmoh","Kenya","Food & Beverage","2025-12-23"]],"English":[["Ni Wayan Wili","Kasih","Indonesia","Culinary","2026-03-30"],["I Gede Aska","Arisavindra","Indonesia","Culinary","2026-03-24"],["Leo Agung Budi","Santoso","Indonesia","Culinary","2026-03-24"],["Renal Glen","Kurniawan","Indonesia","Culinary","2026-02-06"],["I Made Kerta","Negara","Indonesia","Culinary","2026-02-06"],["Ridwan","Dwi Susanto","Indonesia","Food & Beverage","2026-02-04"],["Abdul","Aziz","Indonesia","Housekeeping","2026-01-29"],["I Ketut Bagus Mahendra","Duta","Indonesia","Food & Beverage","2025-12-16"],["I Komang","Sutirja","Indonesia","Food & Beverage","2025-12-16"],["Tanan","Simmalee","Japan","Housekeeping","2025-11-13"]],"Denied":[["Khanapi","Khanapi","Indonesia","Housekeeping","2026-03-23"],["Bima Dzakiy","Pratama","Indonesia","Food & Beverage","2026-03-09"],["Syarif","Hidayatullah","Indonesia","Food & Beverage","2026-03-13"],["Idfi","Pemamoan","Indonesia","Food & Beverage","2026-02-25"],["Anwar","Ibrohim","Indonesia","Housekeeping","2026-02-12"],["Mohammad Ainul","Fawaid","Indonesia","Housekeeping","2026-03-02"],["Awonke","Ralarala","South Africa","Culinary","2026-02-19"],["Gittisak","Dongwang","Thailand","Food & Beverage","2025-12-23"],["Senzeni","Mashabane","South Africa","Food & Beverage","2026-03-13"]],"Pos N/A":[["Kelzier Mwikali","Kavisa","Kenya","Youth Staff","2026-05-22"],["David","Chama","Kenya","Food & Beverage","2026-04-22"],["Terisha","Yenketsamy","South Africa","Youth Staff","2026-04-16"],["Patricia Jean","Hipolito","Philippines","Education","2026-04-15"],["Masria Puspa Dewi","Manik","Indonesia","Youth Staff","2026-03-12"],["Zacharia Sifiso","Mlambo","South Africa","IT","2026-03-05"]]},"cruise_monthly":{"Jan": [["Obet Nehemia Chiwoso", "P&O Cruises", "Galley", "Commis Pastry", "Approved"], ["Bintang Bagas Pamungkas", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Fikri Al ' Amin", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Made Adi Swastika Yasa", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Putu Putra Yogeswara", "P&O Cruises", "Housekeeping", "Housekeeping - Laundry Attendant", "Rescheduled"], ["I Gede Nyoman Yudi Adi Wijaya", "Cunard Line", "Housekeeping", "Hotel Assistant Housekeeping", "Approved"], ["Dio Vani Bagas Priaswanto", "Cunard Line", "Housekeeping", "Hotel Assistant Housekeeping", "Approved"], ["Yulfian Jaya Kusuma", "Cunard Line", "Housekeeping", "Hotel Assistant Housekeeping", "Approved"], ["Sindiswa Xaba", "P&O Cruises", "Culinary", "Demi Chef de Partie Pastry", "No Show"], ["I Nengah Sudiantara", "P&O Cruises", "Housekeeping", "Housekeeping - Laundry Attendant", "No Show"], ["Ditya Hartono Putera", "P&O Cruises", "Culinary", "Demi Chef de Partie Pastry", "No Show"], ["Sithembinkosi Sibanda", "P&O Cruises", "Culinary", "Demi Chef de Partie Pastry", "\u2014"], ["Bernedetus Nova Adaviano", "P&O Cruises", "Housekeeping", "Laundry Assistant", "Approved"], ["Yubilia Devi", "P&O Cruises", "Culinary", "Commis Pastry", "Approved"]], "Feb": [["Vanya Michellelyne", "Cunard Line", "Hotel Ops", "Guest Services - Receptionist", "Declined"], ["Ghani Pamungkas", "P&O Cruises", "Culinary", "Commis Pastry", "Approved"], ["Sandi Sanjaya", "P&O Cruises", "Culinary", "Commis - Pastry", "No Show"], ["Hartono Fnu", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Fahriza Alfian Fauzi", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Pradita Pitaloka", "P&O Cruises", "Culinary", "Commis Pastry", "Approved"], ["Muhammad Samsul Arifin", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Fakeh Sandy Nusyamas", "P&O Cruises", "Housekeeping", "Laundry Assistant", "Approved"], ["Kamila Kamila", "P&O Cruises", "Culinary", "Commis - Pastry", "Declined"], ["Andile Muzingaye Ngwenya", "P&O Cruises", "Culinary", "Commis - Pastry", "Declined"], ["Mzamiseni Dlamini", "P&O Cruises", "Culinary", "Commis - Pastry", "No Show"], ["Lee Roy Tinashe Mudengezi", "P&O Cruises", "Culinary", "Demi Chef de Partie Pastry", "No Show"], ["Sibanda Hardlife", "P&O Cruises", "Culinary", "Commis - Pastry", "Declined"], ["Yeukai Muunganirwa", "P&O Cruises", "Culinary", "Commis - Pastry", "Rescheduled"], ["I Made Angga Adijaya", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Nolvia Harry Cristi Payung", "P&O Cruises", "Culinary", "Commis Pastry", "Approved"]], "Mar": [["Rizky Fadillah", "P&O Cruises", "Galley", "Commis - Pastry", "No Show"], ["Ananda Wahyu Setyawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Mohammad Fahim", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Dedy Kurnia Sandi", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Danang Fajar Nuryanto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Mahindra Ari Trisnawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Andi Hermawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Eka Linda Handayani", "P&O Cruises", "Culinary", "Demi Chef De Partie Pastry", "Approved"], ["I Gede Agus Sugiantara", "P&O Cruises", "Housekeeping", "Laundry Assistant", "No Show"], ["Nathaniel Peter", "P&O Cruises", "Culinary", "Commis - Pastry", "Present"], ["I Komang Dika Pratama", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Ketut Aditya Hendrawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Terta Adi Tama", "P&O Cruises", "Housekeeping", "Laundry Assistant", "Approved"], ["Agung Tyas  Jatmiko", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Wayan Suweta", "P&O Cruises", "Housekeeping", "Housekeeper (Deck/Night/Crew)", "Approved"], ["Ega Dyanta Ratih", "P&O Cruises", "Entertainment", "Stage Crew", "Approved"], ["Prendi Apriyanto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Virgiawan Aji Putranto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Hari Mukti", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Atik Hardiati", "P&O Cruises", "Culinary", "Commis Pastry", "Approved"], ["Juniardi \u2014", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Dina Tera Daristy", "P&O Cruises", "Galley", "Commis Pastry", "Approved"], ["Ni Made Ari Kartika Dewi", "Cunard Line", "Hotel Ops", "Receptionist", "Approved"], ["Sekti Nugroho", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Bukhori Ikhsan Muslim Khoirru Falah", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Kadek Mas Agus Gunawan Adi Putra", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Akhmad Rendi Pratama", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Martinus Bagus Prihananto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Made Vino Adi Wijaya", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"]], "Apr": [["Ni Kadek Deviani", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Putu Dodik Sutaryawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Komang Aprila Jaya Artha Kepakisan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Wayan Sindhu Saputra", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Kadek Bayu Saputra", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Mohamad Ghiyas Ubaidillah", "P&O Cruises", "Galley", "Commis Pastry", "Approved"], ["I Made Rianprajawinata", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Andry Fahmi", "P&O Cruises", "Housekeeping", "Housekeeper (Deck/Night/Crew)", "Approved - Marlins Pending"], ["Muhtarudin Khoiri", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Handry Anom Ervianto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved - Marlins Pending"], ["Mochammad Yusril Rahmatilah", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Gusti Agung Sukham", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Deky Putra Herlambang", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Putu Deo Suhartawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Putu Diva Krisnanata Sudirta", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Kadek Arya Gunawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Ni Luh Jeni Meliantini", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Dewa Kadek Harry Marjaya", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Ndumiso Dlamini", "P&O Cruises", "Galley", "Commis Pastry", "Approved"], ["Hidayat Kusuma", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Ni Kadek Intan Setasih", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Hafiz Fahrurrozi", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Aan Nasrudin", "P&O Cruises", "Housekeeping", "Laundry Assistant", "Approved"], ["Made Paramarta", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Gede Ngurah Nova Sudiartawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Ragil Andani", "P&O Cruises", "Galley", "Commis Pastry", "Approved - Marlins Pending"]], "May": [["Faiz Zhahir Shodiq Prabowo", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Agus Mulyadi", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Muhammad Yudha Pratama", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Andri Purwanto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Dimas Adi Setyawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["I Komang Luki Kusuma", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Fnu Solahudin", "P&O Cruises", "Housekeeping", "Housekeeper (Deck/Night/Crew)", "Approved"], ["Muhammad Yafie Al Hakim", "P&O Cruises", "Galley", "Commis Pastry", "Approved"], ["Irfan Firmansyah", "P&O Cruises", "Galley", "Commis Pastry", "Approved"], ["Arga Andrianto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Ni Made Puspa Sukmantini", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Putu Adi Kusuma", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved - Marlins Pending"], ["Putu Adi Pratama Kori", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved - Marlins Pending"], ["Wildan Achsani Takwim", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved - Marlins Pending"], ["I Ketut Deni Muliawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Dicky Baskoro", "Cunard Line", "Housekeeping", "Hotel Assistant Housekeeping", "Approved"], ["Lukman Adifarhan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Andra Hermawan", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Bagas Apriliyanto", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved"], ["Dhimas Saputra", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved - Marlins Pending"], ["Resa Ardiansyah", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved - Marlins Pending"], ["I Made Agustiawan Dwi Putra", "Cunard Line", "Housekeeping", "Hotel Assistant Housekeeping", "Approved - Marlins Pending"], ["I Wayan Juni Agus Artawan", "Cunard Line", "Housekeeping", "Hotel Assistant Housekeeping", "Approved - Marlins Pending"], ["Taufik Maulidika", "P&O Cruises", "Galley", "Hotel Assistant Food and Beverage", "Approved - Marlins Pending"]]}}};
-
-let currentRows=[], currentHeaders=[];
-
-function statusPill(s){
+// Modal
+let currentRows=[],currentHeaders=[];
+function pill(s){
   if(!s||s==='—') return '<span style="color:var(--mt)">—</span>';
   s=String(s);
-  if(s.includes('Approved')&&s.includes('Marlins')) return `<span class="pill pill-m">${s}</span>`;
-  if(s.startsWith('Approved')) return `<span class="pill pill-g">${s}</span>`;
-  if(s==='On Hold'||s.includes('English')) return `<span class="pill pill-a">${s}</span>`;
-  if(s==='Declined'||s==='Denied') return `<span class="pill pill-r">${s}</span>`;
-  if(s==='No Show') return `<span class="pill pill-a">No Show</span>`;
-  if(s==='Rescheduled') return `<span class="pill pill-b">Rescheduled</span>`;
+  if(s.includes('Marlins Pending')) return `<span class="pill pm">${s}</span>`;
+  if(s.startsWith('Approved')) return `<span class="pill pg">${s}</span>`;
+  if(s==='On Hold'||s.includes('English')) return `<span class="pill pa">${s}</span>`;
+  if(s==='Declined'||s==='Denied') return `<span class="pill pr">${s}</span>`;
+  if(s==='No Show') return `<span class="pill pa">No Show</span>`;
+  if(s==='Rescheduled') return `<span class="pill pb">Rescheduled</span>`;
   return s;
 }
-
 function renderTable(rows,headers){
-  const body=document.getElementById('modal-body');
-  document.getElementById('modal-count').textContent=`${rows.length} candidate${rows.length!==1?'s':''}`;
-  body.innerHTML=`<table class="mtable"><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map((c,i)=>{const isStatus=headers[i]&&(headers[i].toLowerCase().includes('status')||headers[i].toLowerCase().includes('outcome'));return `<td>${isStatus?statusPill(c):c||'—'}</td>`}).join('')}</tr>`).join('')}</tbody></table>`;
+  const statusCols=['Status','Outcome','Call Status'];
+  document.getElementById('modal-count').textContent=rows.length+' candidate'+(rows.length!==1?'s':'');
+  document.getElementById('modal-body').innerHTML=`<table class="mtable"><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map((c,i)=>{const isS=statusCols.some(sc=>headers[i]&&headers[i].includes(sc));return`<td>${isS?pill(c):(c||'—')}</td>`}).join('')}</tr>`).join('')}</tbody></table>`;
 }
-
 function filterModal(){
   const q=document.getElementById('modal-search').value.toLowerCase();
-  const filtered=currentRows.filter(r=>r.join(' ').toLowerCase().includes(q));
-  renderTable(filtered,currentHeaders);
+  renderTable(currentRows.filter(r=>r.join(' ').toLowerCase().includes(q)),currentHeaders);
 }
-
 function openModal(title,sub,rows,headers){
-  currentRows=[...rows];
-  currentHeaders=headers;
+  currentRows=[...rows]; currentHeaders=Array.isArray(headers)?headers:headers.split(',');
   document.getElementById('modal-title').textContent=title;
   document.getElementById('modal-sub').textContent=sub;
   document.getElementById('modal-search').value='';
-  renderTable(rows,headers);
+  renderTable(rows,currentHeaders);
   document.getElementById('overlay').classList.add('open');
 }
-
-function openChart(key,l1,l2,l3,l4,l5,l6,l7,l8,data,color,title,headers,dataKey){
-  const labels=[l1,l2,l3,l4,l5];
-  if(l6) labels.push(l6);if(l7) labels.push(l7);if(l8) labels.push(l8);
-  // find which bar was clicked — we open the full dataset for the key
-  const db=DATA[dataKey]||{};
-  let allRows=[];
-  const hdrs=headers.split(',');
-  Object.entries(db).forEach(([month,rows])=>{allRows=allRows.concat(rows)});
-  openModal(title,'Click a row to see details · showing all months combined',allRows,hdrs);
-}
-
-function openOutcomes(){
-  const labels=['OTC Approved','Approved','On Hold','English Hold','Denied','Pos N/A'];
-  const keys=['OTC Approved','Approved','On Hold','English','Denied','Pos N/A'];
-  let rows=[];
-  keys.forEach((k,i)=>{
-    const arr=DATA.j1_outcomes[k]||[];
-    arr.forEach(r=>rows.push([r[0]+' '+r[1],r[2],r[3],labels[i],r[4]]));
-  });
-  openModal('J1 call outcomes — all candidates','Showing candidates from all outcome categories',rows,['Name','Country','Department','Outcome','Date']);
-}
-
-function openDept(){
-  const deptMap={'F&B':'Food & Beverage','Culinary':'Culinary','Housekeeping':'Housekeeping','Guest Rel':'Guest Relations'};
-  // aggregate from monthly
-  let rows=[];
-  Object.values(DATA.j1_monthly).forEach(month=>{
-    month.forEach(r=>rows.push([r[0]+' '+r[1],r[2],r[3],r[4],r[5]]));
-  });
-  rows=rows.filter((r,i,a)=>a.findIndex(x=>x[0]===r[0]&&x[2]===r[2])===i);
-  openModal('J1 candidates by department','Showing candidates you consulted, grouped by department',rows,['Name','Country','Department','Outcome','Rating']);
-}
-
-function openCountry(){
-  let rows=[];
-  Object.values(DATA.j1_monthly).forEach(month=>{
-    month.forEach(r=>rows.push([r[0]+' '+r[1],r[2],r[3],r[4],r[5]]));
-  });
-  rows=rows.filter((r,i,a)=>a.findIndex(x=>x[0]===r[0]&&x[2]===r[2])===i);
-  openModal('J1 candidates by country','All candidates from your consultation calls',rows,['Name','Country','Department','Outcome','Rating']);
-}
-
-function openCruiseDept(){
-  let rows=[];
-  Object.values(DATA.cruise_monthly).forEach(month=>{
-    month.forEach(r=>rows.push([r[0],r[1],r[2],r[3],r[4]]));
-  });
-  openModal('Cruise line — outcomes by department','All candidates from your confirmed interviews',rows,['Name','Client','Department','Position','Status']);
-}
-
-function openAttendance(){
-  let present=[],noshow=[],rescheduled=[];
-  Object.values(DATA.cruise_monthly).forEach(month=>{
-    month.forEach(r=>{
-      const row=[r[0],r[1],r[2],r[3],r[4]];
-      if(r[4]==='No Show') noshow.push(row);
-      else if(r[4]==='Rescheduled') rescheduled.push(row);
-      else present.push(row);
-    });
-  });
-  const rows=[...present,...noshow,...rescheduled];
-  openModal('Cruise attendance breakdown','Present, no-shows, and rescheduled interviews',rows,['Name','Client','Department','Position','Status']);
-}
-
-function closeModal(e){if(e.target===document.getElementById('overlay')) closeOverlay();}
 function closeOverlay(){document.getElementById('overlay').classList.remove('open');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape') closeOverlay();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeOverlay();});
 
-// Chart click drill-down
-['c-ov-j1','c-j1-monthly'].forEach(id=>{
-  document.getElementById(id).addEventListener('click',function(e){
-    const chart=Chart.getChart(this);
-    const pts=chart.getElementsAtEventForMode(e,'nearest',{intersect:true},true);
-    if(pts.length){
-      const month=['Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'][pts[0].index];
-      const rows=(DATA.j1_monthly[month]||[]).map(r=>[r[0]+' '+r[1],r[2],r[3],r[4],r[5]]);
-      openModal(`J1 calls — ${month}`,`${rows.length} candidates consulted in ${month}`,rows,['Name','Country','Department','Outcome','Rating']);
-    }
-  });
-});
+// J1 helpers
+function allJ1Rows(){
+  let r=[];
+  Object.values(DATA.j1_monthly).forEach(m=>m.forEach(x=>r.push([x[0]+' '+x[1],x[2],x[3],x[4],x[5]])));
+  return r.filter((x,i,a)=>a.findIndex(y=>y[0]===x[0])===i);
+}
+function allCruiseRows(){
+  let r=[];
+  Object.values(DATA.cruise_monthly).forEach(m=>m.forEach(x=>r.push(x)));
+  return r;
+}
+function openAllJ1Monthly(){openModal('All J1 consultation calls','415 calls done by you',allJ1Rows(),['Name','Country','Department','Outcome','Rating']);}
+function openAllCruise(){openModal('All cruise interviews','109 interviews confirmed by you in 2026',allCruiseRows(),['Name','Client','Department','Position','Status']);}
+function openOutcomes(key){
+  const keyMap={'Approved':'Approved','OTC Approved':'OTC Approved','On Hold':'On Hold','English':'English','Denied':'Denied','Pos N/A':'Pos N/A'};
+  let rows=[];
+  if(key==='Approved'){
+    ['OTC Approved','Approved','Pos N/A'].forEach(k=>{(DATA.j1_outcomes[k]||[]).forEach(r=>rows.push([r[0]+' '+r[1],r[2],r[3],k,r[4]]));}); 
+  } else {
+    (DATA.j1_outcomes[key]||[]).forEach(r=>rows.push([r[0]+' '+r[1],r[2],r[3],key,r[4]]));
+  }
+  openModal('J1 — '+key,rows.length+' candidates',rows,['Name','Country','Department','Outcome','Date']);
+}
+function openCruiseByStatus(status){
+  let rows=allCruiseRows();
+  if(status==='offer') rows=rows.filter(r=>r[4]==='Approved'||r[4]==='Approved - Marlins Pending'||r[4]==='Approved - Marlins Passed');
+  else rows=rows.filter(r=>r[4]===status);
+  openModal('Cruise — '+status,rows.length+' candidates',rows,['Name','Client','Department','Position','Status']);
+}
+function openCruiseByClient(client,status){
+  let rows=allCruiseRows().filter(r=>r[1]===client&&r[4].startsWith(status));
+  openModal('Cruise — '+client+' ('+status+')',rows.length+' candidates',rows,['Name','Client','Department','Position','Status']);
+}
+function openCruiseMarlinsPassed(){
+  let rows=allCruiseRows().filter(r=>r[4]==='Approved');
+  openModal('Cruise — Marlins passed',rows.length+' candidates',rows,['Name','Client','Department','Position','Status']);
+}
+function openCruiseDept(dept){
+  let rows=allCruiseRows().filter(r=>r[2]===dept);
+  openModal('Cruise — '+dept,rows.length+' candidates',rows,['Name','Client','Department','Position','Status']);
+}
 
-['c-ov-cruise','c-cr-monthly'].forEach(id=>{
-  document.getElementById(id).addEventListener('click',function(e){
-    const chart=Chart.getChart(this);
-    const pts=chart.getElementsAtEventForMode(e,'nearest',{intersect:true},true);
-    if(pts.length){
-      const month=['Jan','Feb','Mar','Apr','May'][pts[0].index];
-      const rows=(DATA.cruise_monthly[month]||[]).map(r=>[r[0],r[1],r[2],r[3],r[4]]);
-      openModal(`Cruise interviews — ${month}`,`${rows.length} candidates in ${month} 2026`,rows,['Name','Client','Department','Position','Status']);
-    }
-  });
-});
-
-document.getElementById('c-j1-outcomes').addEventListener('click',function(e){
-  const chart=Chart.getChart(this);
-  const pts=chart.getElementsAtEventForMode(e,'nearest',{intersect:true},true);
-  if(pts.length){
-    const labels=['OTC Approved','Approved','On Hold','English','Denied','Pos N/A'];
-    const key=labels[pts[0].index];
+// Chart click handlers
+function clickChart(id,event){
+  const chart=Chart.getChart(id);
+  if(!chart) return;
+  const pts=chart.getElementsAtEventForMode(event,'nearest',{intersect:true},true);
+  if(!pts.length) return;
+  const idx=pts[0].index;
+  if(id==='c-ov-j1'||id==='c-j1-monthly'){
+    const month=['Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'][idx];
+    const rows=(DATA.j1_monthly[month]||[]).map(r=>[r[0]+' '+r[1],r[2],r[3],r[4],r[5]]);
+    openModal('J1 calls — '+month,rows.length+' candidates in '+month,rows,['Name','Country','Department','Outcome','Rating']);
+  } else if(id==='c-ov-cruise'||id==='c-cr-monthly'){
+    const month=['Jan','Feb','Mar','Apr','May'][idx];
+    const rows=DATA.cruise_monthly[month]||[];
+    openModal('Cruise interviews — '+month,rows.length+' candidates in '+month+' 2026',rows,['Name','Client','Department','Position','Status']);
+  } else if(id==='c-j1-outcomes'){
+    const keys=['OTC Approved','Approved','On Hold','English','Denied','Pos N/A'];
+    const key=keys[idx];
     const rows=(DATA.j1_outcomes[key]||[]).map(r=>[r[0]+' '+r[1],r[2],r[3],r[4]]);
-    openModal(`J1 outcome — ${key}`,`${rows.length} candidates with this outcome`,rows,['Name','Country','Department','Date']);
-  }
-});
-
-document.getElementById('c-j1-dept').addEventListener('click',function(e){
-  const chart=Chart.getChart(this);
-  const pts=chart.getElementsAtEventForMode(e,'nearest',{intersect:true},true);
-  if(pts.length){
-    const deptLabels=['Food & Beverage','Culinary','Housekeeping','Guest Relations','Finance','Security','Information Technology','Youth Staff'];
-    const dept=deptLabels[pts[0].index];
-    let rows=[];
-    Object.values(DATA.j1_monthly).forEach(month=>month.forEach(r=>{if(r[3]===dept||r[3].includes(dept.split(' ')[0]))rows.push([r[0]+' '+r[1],r[2],r[4],r[5]])}));
-    rows=rows.filter((r,i,a)=>a.findIndex(x=>x[0]===r[0])===i);
-    openModal(`J1 — ${dept}`,`${rows.length} candidates in this department`,rows,['Name','Country','Outcome','Rating']);
-  }
-});
-
-document.getElementById('c-j1-country').addEventListener('click',function(e){
-  const chart=Chart.getChart(this);
-  const pts=chart.getElementsAtEventForMode(e,'nearest',{intersect:true},true);
-  if(pts.length){
-    const countryMap=['Indonesia','Thailand','South Africa','Kenya','Zimbabwe','India'];
-    const country=countryMap[pts[0].index];
-    let rows=[];
-    Object.values(DATA.j1_monthly).forEach(month=>month.forEach(r=>{if(r[2]===country)rows.push([r[0]+' '+r[1],r[3],r[4],r[5]])}));
-    rows=rows.filter((r,i,a)=>a.findIndex(x=>x[0]===r[0])===i);
-    openModal(`J1 — ${country}`,`${rows.length} candidates from ${country}`,rows,['Name','Department','Outcome','Rating']);
-  }
-});
-
-document.getElementById('c-cr-dept').addEventListener('click',function(e){
-  const chart=Chart.getChart(this);
-  const pts=chart.getElementsAtEventForMode(e,'nearest',{intersect:true},true);
-  if(pts.length){
+    openModal('J1 outcome — '+key,rows.length+' candidates',rows,['Name','Country','Department','Date']);
+  } else if(id==='c-j1-dept'){
+    const depts=['Food & Beverage','Culinary','Housekeeping','Guest Relations','Finance','Security','IT','Youth Staff'];
+    const dept=depts[idx];
+    const rows=allJ1Rows().filter(r=>r[2]===dept||r[2].includes(dept.split(' ')[0]));
+    openModal('J1 — '+dept,rows.length+' candidates',rows,['Name','Country','Department','Outcome','Rating']);
+  } else if(id==='c-j1-country'){
+    const countries=['Indonesia','Thailand','South Africa','Kenya','Zimbabwe','India'];
+    const country=countries[idx];
+    const rows=allJ1Rows().filter(r=>r[1]===country);
+    openModal('J1 — '+country,rows.length+' candidates from '+country,rows,['Name','Country','Department','Outcome','Rating']);
+  } else if(id==='c-cr-dept'){
     const depts=['Galley','Culinary','Housekeeping','Hotel Ops','Entertainment'];
     const dept=depts[pts[0].index];
-    let rows=[];
-    Object.values(DATA.cruise_monthly).forEach(month=>month.forEach(r=>{if(r[2]===dept)rows.push([r[0],r[1],r[3],r[4]])}));
-    openModal(`Cruise — ${dept}`,`${rows.length} candidates in ${dept}`,rows,['Name','Client','Position','Status']);
+    openCruiseDept(dept);
+  } else if(id==='c-cr-att'){
+    const labels=['Present','No Show','Rescheduled'];
+    const att=labels[idx];
+    let rows=allCruiseRows();
+    if(att==='Present') rows=rows.filter(r=>r[4]!=='No Show'&&r[4]!=='Rescheduled');
+    else rows=rows.filter(r=>r[4]===att);
+    openModal('Cruise — '+att,rows.length+' candidates',rows,['Name','Client','Department','Position','Status']);
   }
-});
+}
 
-document.getElementById('c-cr-att').addEventListener('click',function(e){
-  const chart=Chart.getChart(this);
-  const pts=chart.getElementsAtEventForMode(e,'nearest',{intersect:true},true);
-  if(pts.length){
-    const attLabels=['Present','No Show','Rescheduled'];
-    const att=attLabels[pts[0].index];
-    let rows=[];
-    Object.values(DATA.cruise_monthly).forEach(month=>month.forEach(r=>{
-      const isMatch=(att==='Present'&&r[4]!=='No Show'&&r[4]!=='Rescheduled')||(att==='No Show'&&r[4]==='No Show')||(att==='Rescheduled'&&r[4]==='Rescheduled');
-      if(isMatch) rows.push([r[0],r[1],r[2],r[3],r[4]]);
-    }));
-    openModal(`Cruise attendance — ${att}`,`${rows.length} candidates`,rows,['Name','Client','Department','Position','Status']);
-  }
-}); // close DOMContentLoaded
-});
+// Init
+buildCharts();
 </script>
 </body>
 </html>
