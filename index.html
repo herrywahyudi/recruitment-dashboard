@@ -154,6 +154,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Outfit',sans-serif;font-s
   <button class="tab active" onclick="showTab('overview',this)">Overview</button>
   <button class="tab" onclick="showTab('j1',this)">J1 Program</button>
   <button class="tab" onclick="showTab('cruise',this)">Cruise Line</button>
+  <button class="tab" onclick="showTab('hired',this)">Cruise Hired 2026</button>
 </div>
 
 <div class="main">
@@ -305,6 +306,26 @@ body{background:var(--bg);color:var(--tx);font-family:'Outfit',sans-serif;font-s
 
 </div>
 
+
+<!-- HIRED 2026 -->
+<div class="sec" id="sec-hired">
+  <div class="sh"><span class="st">Cruise Hired 2026</span><span class="ss">87 seafarers hired this year</span></div>
+  <div class="metrics" style="grid-template-columns:repeat(3,1fr)">
+    <div class="metric c-red"><div class="ml">Total hired 2026</div><div class="mv red">87</div><div class="ms">Jan – May 2026</div></div>
+    <div class="metric c-blue" onclick="openHiredModal(null,'assigned')"><div class="ml">Got embark date</div><div class="mv blue">23</div><div class="ms">26% placed · click to view</div></div>
+    <div class="metric c-gold" onclick="openHiredModal(null,'pending')"><div class="ml">No date yet</div><div class="mv gold">64</div><div class="ms">74% waiting · click to view</div></div>
+  </div>
+  <div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:20px;margin-bottom:14px">
+    <div class="ct">Position breakdown — hired vs got embark date · click any bar</div>
+    <div style="position:relative;height:260px"><canvas id="c-hired-pos"></canvas></div>
+    <div style="display:flex;gap:16px;margin-top:10px;font-size:11px;color:var(--mt)">
+      <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;background:#2980b9;border-radius:2px;display:inline-block"></span>Hired</span>
+      <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;background:#27ae60;border-radius:2px;display:inline-block"></span>Got embark date</span>
+    </div>
+  </div>
+  <div id="hired-pos-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-bottom:14px"></div>
+</div>
+
 <!-- MODAL -->
 <div class="overlay" id="overlay" onclick="if(event.target===this)closeOverlay()">
   <div class="modal">
@@ -360,6 +381,85 @@ function mkGrouped(id,labels,ds){
   });
 }
 
+const HIRED_DATA=[{"p":"Hotel Assistant Food and Beverage","a":14,"pn":44,"t":58,"ap":[{"n":"I Made Vino Adi Wijaya","h":"2026-03-17","s":"Iona","e":"2026-06-13","d":"2027-03-13","o":"Completing Documents","c":"P&O Cruises","w":"USD 630,00"},{"n":"I Kadek Bayu Saputra","h":"2026-04-06","s":"Iona","e":"2026-06-13","d":"2027-03-13","o":"Completing Documents","c":"P&O Cruises","w":"USD 630,00"},{"n":"I Wayan Sindhu Saputra","h":"2026-04-06","s":"Azura","e":"2026-06-11","d":"2027-03-06","o":"Completing Documents","c":"P&O Cruises","w":"USD 630,00"},{"n":"I Komang Aprila Jaya Artha Kepakisan","h":"2026-04-01","s":"Iona","e":"2026-06-06","d":"2027-02-27","o":"Completing Documents","c":"P&O Cruises","w":"USD 630,00"},{"n":"I Putu Dodik Sutaryawan","h":"2026-04-01","s":"Britannia","e":"2026-06-05","d":"2027-03-05","o":"Ready to Go","c":"P&O Cruises","w":"USD 630,00"},{"n":"Ni Kadek Deviani","h":"2026-04-01","s":"Britannia","e":"2026-06-05","d":"2027-03-05","o":"Ready to Go","c":"P&O Cruises","w":"USD 630,00"},{"n":"Akhmad Rendi Pratama","h":"2026-03-17","s":"Arvia","e":"2026-06-07","d":"2027-02-26","o":"Completing Documents","c":"P&O Cruises","w":"USD 630,00"},{"n":"Bukhori Ikhsan Muslim Khoirru Falah","h":"2026-03-17","s":"Arvia","e":"2026-06-07","d":"2027-02-26","o":"Completing Documents","c":"P&O Cruises","w":"USD 630,00"},{"n":"Sekti Nugroho","h":"2026-03-16","s":"Iona","e":"2026-06-06","d":"2027-02-27","o":"Completing Documents","c":"P&O Cruises","w":"USD 630,00"},{"n":"Martinus Bagus Prihananto","h":"2026-03-17","s":"Arvia","e":"2026-06-07","d":"2027-02-26","o":"Completing Documents","c":"P&O Cruises","w":"USD 630,00"},{"n":"I Kadek Mas Agus Gunawan Adi Putra","h":"2026-03-17","s":"Iona","e":"2026-06-06","d":"2027-02-27","o":"Completing Documents","c":"P&O Cruises","w":"USD 630,00"},{"n":"Mohammad Fahim","h":"2026-03-02","s":"Iona","e":"2026-06-06","d":"2027-02-27","o":"Ready to Go","c":"P&O Cruises","w":"USD 630,00"},{"n":"I Made Angga Adijaya","h":"2026-02-27","s":"Iona","e":"2026-06-27","d":"2027-02-27","o":"Rescheduled","c":"P&O Cruises","w":"USD 630,00"},{"n":"I Komang Dika Pratama","h":"2026-03-03","s":"Arvia","e":"2026-06-07","d":"2027-02-26","o":"Completing Documents","c":"P&O Cruises","w":"USD 630,00"}],"pp":[{"n":"Putu Adi Pratama Kori","h":"2026-05-08","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Bagas Apriliyanto","h":"2026-05-19","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Andra Hermawan","h":"2026-05-19","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Lukman Adifarhan","h":"2026-05-18","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Agus Mulyadi","h":"2026-05-04","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"I Ketut Deni Muliawan","h":"2026-05-12","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Ni Made Puspa Sukmantini","h":"2026-05-08","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Arga Andrianto","h":"2026-05-06","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"I Komang Luki Kusuma","h":"2026-05-05","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Dimas Adi Setyawan","h":"2026-05-04","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Andri Purwanto","h":"2026-05-04","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Muhammad Yudha Pratama","h":"2026-05-04","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Faiz Zhahir Shodiq Prabowo","h":"2026-05-04","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"I Gusti Ngurah Nova Sudiartawan","h":"2026-04-28","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Hafiz Fahrurrozi","h":"2026-04-28","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Ni Kadek Intan Setasih","h":"2026-04-28","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Made Paramartha","h":"2026-04-28","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Dewa Kadek Harry Marjaya","h":"2026-04-24","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Hidayat Kusuma","h":"2026-04-27","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Mochammad Yusril Rahmatilah","h":"2026-04-15","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Ni Luh Jeni Meliantini","h":"2026-04-24","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"I Putu Diva Krisnanata Sudirta","h":"2026-04-17","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Putu Deo Suhartawan","h":"2026-04-17","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Kadek Arya Gunawan","h":"2026-04-17","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"I Gusti Agung Sukham","h":"2026-04-15","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Deky Putra Herlambang","h":"2026-04-15","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Muhtarudin Khoiri","h":"2026-04-13","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"I Made Rianprajawinata","h":"2026-04-10","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Fnu Juniardi","h":"2026-03-10","s":"Iona","e":"","d":"","o":"Report to Ship","c":"P&O Cruises","w":""},{"n":"Hari Mukti","h":"2026-03-09","s":"Arvia","e":"","d":"","o":"Ready to Go","c":"P&O Cruises","w":""},{"n":"Agung Tyas Jatmiko","h":"2026-03-09","s":"Arvia","e":"","d":"","o":"Report to Ship","c":"P&O Cruises","w":""},{"n":"Aji Putranto Virgiawan","h":"2026-03-09","s":"Iona","e":"","d":"","o":"Ready to Go","c":"P&O Cruises","w":""},{"n":"Apriyanto Prendi","h":"2026-03-09","s":"Iona","e":"","d":"","o":"Ready to Go","c":"P&O Cruises","w":""},{"n":"I Ketut Aditya Hendrawan","h":"2026-03-03","s":"Arvia","e":"","d":"","o":"Report to Ship","c":"P&O Cruises","w":""},{"n":"Dedy Kurnia Sandi","h":"2026-03-02","s":"Arvia","e":"","d":"","o":"Report to Ship","c":"P&O Cruises","w":""},{"n":"Mahindra Ari Trisnawan","h":"2026-03-02","s":"Arvia","e":"","d":"","o":"Ready to Go","c":"P&O Cruises","w":""},{"n":"Andi Hermawan","h":"2026-02-03","s":"Arvia","e":"","d":"","o":"Report to Ship","c":"P&O Cruises","w":""},{"n":"Danang Fajar Nuryanto","h":"2026-02-03","s":"Iona","e":"","d":"","o":"Report to Ship","c":"P&O Cruises","w":""},{"n":"Ananda Wahyu Setyawan","h":"2026-02-03","s":"Arvia","e":"","d":"","o":"Report to Ship","c":"P&O Cruises","w":""},{"n":"Muhammad Samsul Arifin","h":"2026-02-11","s":"Iona","e":"","d":"","o":"Report to Ship","c":"P&O Cruises","w":""},{"n":"Fahriza Alfian Fauzi","h":"2026-02-10","s":"Iona","e":"","d":"","o":"Report to Ship","c":"P&O Cruises","w":""},{"n":"Fnu Hartono","h":"2026-02-10","s":"Arvia","e":"","d":"","o":"Report to Ship","c":"P&O Cruises","w":""},{"n":"I Made Adi Swastika Yasa","h":"2026-01-08","s":"Arvia","e":"","d":"","o":"Report to Ship","c":"P&O Cruises","w":""},{"n":"Fikri Al ' Amin","h":"2026-01-08","s":"Ventura","e":"","d":"","o":"Report to Ship","c":"P&O Cruises","w":""}]},{"p":"Commis Pastry","a":3,"pn":4,"t":7,"ap":[{"n":"Dina Tera Daristy","h":"2026-03-12","s":"Arvia","e":"2026-06-07","d":"2027-02-26","o":"Completing Documents","c":"P&O Cruises","w":"USD 867,00"},{"n":"Atik Hardianti","h":"2026-03-10","s":"Iona","e":"2026-06-27","d":"2027-03-27","o":"Completing Documents","c":"P&O Cruises","w":"USD 867,00"},{"n":"Ghani Galih Pamungkas","h":"2026-02-04","s":"Arvia","e":"2026-07-05","d":"2027-03-28","o":"Completing Documents","c":"P&O Cruises","w":"USD 867,00"}],"pp":[{"n":"Irfan Firmansyah","h":"2026-05-07","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Muhammad Yafie Al Hakim","h":"2026-05-06","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Mzamiseni Ndumiso Dlamini","h":"2026-04-27","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Yubilia Devi","h":"2026-01-30","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""}]},{"p":"Technical Rating","a":0,"pn":7,"t":7,"ap":[],"pp":[{"n":"Firyal Fariz","h":"2026-05-21","s":"","e":"","d":"","o":"Completing Documents","c":"CUK Maritime","w":""},{"n":"Rizqi Chivan Smith","h":"2026-04-13","s":"","e":"","d":"","o":"Completing Documents","c":"CUK Maritime","w":""},{"n":"Fnu Suwandi","h":"2026-02-25","s":"","e":"","d":"","o":"Completing Documents","c":"CUK Maritime","w":""},{"n":"Dinda Ayu Barbyanavy","h":"2026-02-10","s":"","e":"","d":"","o":"Completing Documents","c":"CUK Maritime","w":""},{"n":"Abby Satya Amridzan","h":"2026-02-10","s":"","e":"","d":"","o":"Completing Documents","c":"CUK Maritime","w":""},{"n":"Adrian Choirul Fadli Mangga","h":"2026-02-03","s":"","e":"","d":"","o":"Completing Documents","c":"CUK Maritime","w":""},{"n":"Ariq Rahman","h":"2026-01-15","s":"","e":"","d":"","o":"Completing Documents","c":"CUK Maritime","w":""}]},{"p":"Hotel Assistant Housekeeping","a":2,"pn":2,"t":4,"ap":[{"n":"Yulfian Jaya Kusuma","h":"2026-01-15","s":"Queen Mary 2","e":"2026-08-04","d":"2027-05-09","o":"Completing Documents","c":"Cunard Line","w":"USD 893,00"},{"n":"I Gede Nyoman Yudi Adi Wijaya","h":"2026-01-15","s":"Queen Victoria","e":"2026-07-27","d":"2027-03-22","o":"Completing Documents","c":"Cunard Line","w":"USD 893,00"}],"pp":[{"n":"Dicky Baskoro","h":"2026-05-18","s":"","e":"","d":"","o":"Completing Documents","c":"Cunard Line","w":""},{"n":"Dio Vani  Bagas Aji Priaswanto","h":"2026-01-15","s":"Queen Victoria","e":"","d":"","o":"Completing Documents","c":"Cunard Line","w":""}]},{"p":"Laundry Assistant","a":1,"pn":3,"t":4,"ap":[{"n":"Bernedetus Nova Aldaviano","h":"2026-01-30","s":"Arcadia","e":"2026-08-05","d":"2027-04-23","o":"Completing Documents","c":"P&O Cruises","w":"USD 636,00"}],"pp":[{"n":"Aan Nasrudin","h":"2026-04-28","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""},{"n":"Adi Tama Terta","h":"2026-03-09","s":"Ventura","e":"","d":"","o":"Ready to Go","c":"P&O Cruises","w":""},{"n":"Fakeh Sandy Nursyamas","h":"2026-02-12","s":"Ventura","e":"","d":"","o":"Ready to Go","c":"P&O Cruises","w":""}]},{"p":"Housekeeper (Deck/Night/Crew)","a":1,"pn":1,"t":2,"ap":[{"n":"I Wayan Suweta","h":"2026-03-09","s":"Iona","e":"2026-08-15","d":"2027-02-13","o":"Completing Documents","c":"P&O Cruises","w":"USD 1.839,00"}],"pp":[{"n":"Fnu Solahudin","h":"2026-05-06","s":"","e":"","d":"","o":"Completing Documents","c":"P&O Cruises","w":""}]},{"p":"Sailor OS","a":0,"pn":1,"t":1,"ap":[],"pp":[{"n":"Eggy Ridzky Septian","h":"2026-05-18","s":"","e":"","d":"","o":"Completing Documents","c":"CUK Maritime","w":""}]},{"p":"Electrical Technician","a":0,"pn":1,"t":1,"ap":[],"pp":[{"n":"Leonardus Aldo Sena","h":"2026-04-13","s":"","e":"","d":"","o":"Completing Documents","c":"CUK Maritime","w":""}]},{"p":"Receptionist","a":0,"pn":1,"t":1,"ap":[],"pp":[{"n":"Ni Made Ari Kartika Dewi","h":"2026-03-16","s":"","e":"","d":"","o":"Completing Documents","c":"Cunard Line","w":""}]},{"p":"Stage Crew","a":1,"pn":0,"t":1,"ap":[{"n":"Ega Dyanta Ratih","h":"2026-03-09","s":"Ventura","e":"2026-07-07","d":"2027-01-04","o":"Completing Documents","c":"P&O Cruises","w":"USD 1.273,00"}],"pp":[]},{"p":"Demi Chef De Partie Pastry","a":1,"pn":0,"t":1,"ap":[{"n":"Eka Linda Handayani","h":"2026-03-03","s":"Aurora","e":"2026-06-15","d":"2027-01-03","o":"Rescheduled","c":"P&O Cruises","w":"USD 1.671,00"}],"pp":[]}];
+
+function buildHiredCards(){
+  const container=document.getElementById('hired-pos-cards');
+  if(!container)return;
+  container.innerHTML=HIRED_DATA.map((p,i)=>{
+    const pct=p.t>0?Math.round(p.a/p.t*100):0;
+    return '<div class="metric c-blue" style="cursor:pointer" onclick="openHiredModal('+i+','assigned')">'
+      +'<div class="ml" style="font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+p.p+'</div>'
+      +'<div style="display:flex;align-items:baseline;gap:6px;margin:8px 0 4px">'
+      +'<span style="font-size:24px;font-weight:600;color:var(--blue)">'+p.t+'</span>'
+      +'<span style="font-size:11px;color:var(--mt)">hired</span>'
+      +'</div>'
+      +'<div style="height:4px;background:var(--sf2);border-radius:2px;display:flex;margin-bottom:6px">'
+      +'<div style="width:'+pct+'%;background:#27ae60"></div>'
+      +'<div style="width:'+(100-pct)+'%;background:#e67e22"></div>'
+      +'</div>'
+      +'<div style="font-size:11px">'
+      +'<span style="color:#27ae60">'+p.a+' placed</span> &nbsp;&middot;&nbsp; '
+      +'<span style="color:#e67e22">'+p.pn+' pending</span> &nbsp;&middot;&nbsp; '
+      +'<span style="color:var(--mt)">'+pct+'%</span>'
+      +'</div>'
+      +'</div>';
+  }).join('');
+}
+
+function openHiredModal(idx,tab){
+  var rows=[],title='',sub='';
+  if(idx===null){
+    if(tab==='assigned'){
+      HIRED_DATA.forEach(function(p){p.ap.forEach(function(r){rows.push([r.n,r.h,r.s||'—',r.e||'—',r.d||'—',r.c,r.o]);});});
+      title='All seafarers — got embark date';
+      sub=rows.length+' seafarers with confirmed assignment';
+    }else{
+      HIRED_DATA.forEach(function(p){p.pp.forEach(function(r){rows.push([r.n,r.h,r.s||'—','—','—',r.c,r.o]);});});
+      title='All seafarers — no embark date yet';
+      sub=rows.length+' seafarers awaiting assignment';
+    }
+  }else{
+    var p=HIRED_DATA[idx];
+    var people=tab==='assigned'?p.ap:p.pp;
+    rows=people.map(function(r){return[r.n,r.h,r.s||'—',r.e||'—',r.d||'—',r.c,r.o];});
+    title=p.p+(tab==='assigned'?' — got embark date':' — no date yet');
+    sub=rows.length+' seafarers';
+  }
+  openModal(title,sub,rows,['Name','Hired','Ship','Embark date','Disembark','Cruise line','Onboarding']);
+}
+
+function buildHiredChart(){
+  if(CHARTS['c-hired-pos'])CHARTS['c-hired-pos'].destroy();
+  var labels=HIRED_DATA.map(function(p){return p.p.replace('Hotel Assistant ','HOAS ').replace('Housekeeper (Deck/Night/Crew)','Housekeeper');});
+  CHARTS['c-hired-pos']=new Chart(document.getElementById('c-hired-pos'),{
+    type:'bar',
+    data:{labels:labels,datasets:[
+      {label:'Hired',data:HIRED_DATA.map(function(p){return p.t;}),backgroundColor:'#2980b9',borderRadius:3,barPercentage:0.5,categoryPercentage:0.8},
+      {label:'Embark date',data:HIRED_DATA.map(function(p){return p.a;}),backgroundColor:'#27ae60',borderRadius:3,barPercentage:0.5,categoryPercentage:0.8}
+    ]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{afterBody:function(items){
+        var p=HIRED_DATA[items[0].index];
+        var pct=p.t>0?Math.round(p.a/p.t*100):0;
+        return['Placed: '+pct+'%','click to see people'];
+      }}}},
+      onClick:function(e,elements){
+        if(!elements.length)return;
+        var idx=elements[0].index;
+        var dsIdx=elements[0].datasetIndex;
+        openHiredModal(idx,dsIdx===1?'assigned':'pending');
+      },
+      scales:{
+        x:{ticks:{color:'rgba(255,255,255,0.3)',font:{size:10,family:"'DM Mono',monospace"},maxRotation:30},grid:{display:false}},
+        y:{beginAtZero:true,ticks:{color:'rgba(255,255,255,0.3)',font:{size:11,family:"'DM Mono',monospace"}},grid:{color:'rgba(255,255,255,0.06)'}}
+      }
+    }
+  });
+}
+
+
 function buildCharts(){
   mkBar('c-ov-j1',['Oct','Nov','Dec','Jan','Feb','Mar','Apr','May'],[16,52,64,27,75,96,42,18],'#c0392b');
   mkBar('c-ov-cruise',['Jan','Feb','Mar','Apr','May'],[14,16,29,26,24],'#2980b9');
@@ -373,6 +473,8 @@ function buildCharts(){
     {label:'Declined',data:[0,4,0,1,0],backgroundColor:'#c0392b',borderRadius:3}
   ]);
   mkDonut('c-cr-att',['Present','No Show','Rescheduled'],[98,8,2],['#2ecc71','#e67e22','#2980b9']);
+  buildHiredChart();
+  buildHiredCards();
 }
 
 // Show tab
