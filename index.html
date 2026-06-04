@@ -240,6 +240,61 @@ body{background:var(--bg);color:var(--tx);font-family:'Outfit',sans-serif;font-s
     </div>
   </div>
   <div class="c2">
+    <div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:20px">
+      <div class="ct">P&amp;O Cruises vs Cunard Line</div>
+      <div style="margin-bottom:18px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+          <span style="font-size:13px;font-weight:500;color:var(--tx)">P&amp;O Cruises</span>
+          <span style="font-size:11px;color:var(--mt);font-family:'DM Mono',monospace">86 approved</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px">
+          <div style="background:var(--sf2);border-radius:6px;padding:8px;text-align:center;cursor:pointer" onclick="openClientGiven('P&O Cruises')">
+            <div style="font-size:18px;font-weight:600;color:#2ecc71">39</div>
+            <div style="font-size:10px;color:var(--mt);margin-top:2px">Given</div>
+          </div>
+          <div style="background:var(--sf2);border-radius:6px;padding:8px;text-align:center;cursor:pointer" onclick="openClientWaiting('P&O Cruises')">
+            <div style="font-size:18px;font-weight:600;color:var(--blue)">36</div>
+            <div style="font-size:10px;color:var(--mt);margin-top:2px">Waiting</div>
+          </div>
+          <div style="background:var(--sf2);border-radius:6px;padding:8px;text-align:center">
+            <div style="font-size:18px;font-weight:600;color:var(--gold)">6</div>
+            <div style="font-size:10px;color:var(--mt);margin-top:2px">Marlins</div>
+          </div>
+        </div>
+        <div style="height:5px;background:var(--sf2);border-radius:3px;overflow:hidden">
+          <div style="height:100%;width:45%;background:linear-gradient(90deg,#c0392b,#2ecc71);border-radius:3px"></div>
+        </div>
+        <div style="font-size:10px;color:var(--mt);margin-top:3px;font-family:'DM Mono',monospace">39/86 given assignment (45%)</div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+          <span style="font-size:13px;font-weight:500;color:var(--tx)">Cunard Line</span>
+          <span style="font-size:11px;color:var(--mt);font-family:'DM Mono',monospace">7 approved</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px">
+          <div style="background:var(--sf2);border-radius:6px;padding:8px;text-align:center;cursor:pointer" onclick="openClientGiven('Cunard Line')">
+            <div style="font-size:18px;font-weight:600;color:#2ecc71">3</div>
+            <div style="font-size:10px;color:var(--mt);margin-top:2px">Given</div>
+          </div>
+          <div style="background:var(--sf2);border-radius:6px;padding:8px;text-align:center;cursor:pointer" onclick="openClientWaiting('Cunard Line')">
+            <div style="font-size:18px;font-weight:600;color:var(--blue)">4</div>
+            <div style="font-size:10px;color:var(--mt);margin-top:2px">Waiting</div>
+          </div>
+          <div style="background:var(--sf2);border-radius:6px;padding:8px;text-align:center">
+            <div style="font-size:18px;font-weight:600;color:var(--gold)">0</div>
+            <div style="font-size:10px;color:var(--mt);margin-top:2px">Marlins</div>
+          </div>
+        </div>
+        <div style="height:5px;background:var(--sf2);border-radius:3px;overflow:hidden">
+          <div style="height:100%;width:43%;background:linear-gradient(90deg,#c0392b,#2ecc71);border-radius:3px"></div>
+        </div>
+        <div style="font-size:10px;color:var(--mt);margin-top:3px;font-family:'DM Mono',monospace">3/7 given assignment (43%)</div>
+      </div>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--bd)">
+        <div class="sr" onclick="openCruiseMarlinsPassed()"><span class="sk">Marlins passed</span><span class="sv" style="color:#2ecc71">78</span></div>
+        <div class="sr" onclick="openCVGiven()"><span class="sk">Total given assignment</span><span class="sv" style="color:#2ecc71">42</span></div>
+      </div>
+    </div>
     <span style="font-size:13px;font-weight:500;color:var(--tx)">Cunard Line</span>
           <span style="font-size:11px;color:var(--mt);font-family:'DM Mono',monospace">7 approved</span>
         </div>
